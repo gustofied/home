@@ -1,14 +1,18 @@
+import hashlib
 import json
 import shutil
+from datetime import UTC, datetime
 from pathlib import Path
 
 import pytest
 
 from backend.analytics import analyze
+from backend.fetch import Fetcher
 from backend.ingestion import normalize_observations
+from backend.models import SourceSnapshot
 from backend.pipeline import run_pipeline
 from backend.quality import assess_quality
-from backend.storage import read_facilities
+from backend.storage import read_facilities, write_json, write_snapshot
 
 EXAMPLE = Path(__file__).resolve().parents[1] / "data" / "bronze" / "example"
 
@@ -118,3 +122,87 @@ def test_constant_data_correlation_is_explicitly_undefined(tmp_path, offline):
     report = analyze([record] * 5, {}, "test", record.fetched_at, {})
     assert report.summary["correlation"]["pearson"] is None
     assert "constant" in report.summary["correlation"]["reason"]
+
+
+@pytest.mark.parametrize(
+    ("title", "expected_reason", "published"),
+    [
+        ("(ORD1) Duplicate facility", "duplicate_candidate", False),
+        ("Aggregate Campus", "campus_aggregate", True),
+    ],
+)
+def test_duplicate_candidates_and_aggregate_cards_are_accounted_for(
+    tmp_path, offline, title, expected_reason, published
+):
+    snapshot = tmp_path / "input"
+    shutil.copytree(EXAMPLE, snapshot)
+    manifest = json.loads((snapshot / "manifest.json").read_text())
+    market_url = manifest["scope"][0]
+    entry = next(p for p in manifest["pages"] if p["requested_url"] == market_url)
+    path = snapshot / entry["path"]
+    extra = f'<div class="c-data-center-card"><h4 class="c-data-center-card__title"><a href="{market_url}600-south-federal-street/">{title}</a></h4></div>'.encode()
+    path.write_bytes(path.read_bytes() + extra)
+    entry["sha256"] = hashlib.sha256(path.read_bytes()).hexdigest()
+    (snapshot / "manifest.json").write_text(json.dumps(manifest))
+    result = run_pipeline(tmp_path, from_snapshot=snapshot)
+    assert result.published is published
+    assert result.accepted == 4 and result.rejected == 1
+    quality = json.loads(result.report_path.read_text())["quality"]
+    assert quality["accounting"]["reconciled"]
+    assert quality["rejections"][0]["reason"] == expected_reason
+
+
+def test_count_collapse_blocks_publication(tmp_path, offline):
+    result = run_pipeline(tmp_path, from_snapshot=EXAMPLE)
+    records = read_facilities(tmp_path, result.run_id)
+    candidates = [{"url": str(r.detail_url), "code": r.facility_code} for r in records]
+    quality = assess_quality(records, candidates, [], [], [], [], previous_count=10)
+    assert "candidate_count_drop_over_20_percent" in quality["blockers"]
+
+
+def test_full_portfolio_count_drop_is_checked_when_market_discovery_changes(
+    tmp_path, offline, monkeypatch
+):
+    snapshot = tmp_path / "input"
+    shutil.copytree(EXAMPLE, snapshot)
+    manifest = json.loads((snapshot / "manifest.json").read_text())
+    url = "https://www.databank.com/data-centers/"
+    content = b'<a href="/data-centers/chicago/">Chicago</a>'
+    manifest["pages"].append(
+        write_snapshot(
+            snapshot,
+            SourceSnapshot(
+                url,
+                url,
+                datetime(2026, 1, 1, tzinfo=UTC),
+                200,
+                {},
+                0,
+                content,
+                hashlib.sha256(content).hexdigest(),
+            ),
+        )
+    )
+    write_json(snapshot / "manifest.json", manifest)
+    write_json(tmp_path / "latest.json", {"run_id": "previous"})
+    write_json(
+        tmp_path / "gold" / "previous" / "report.json",
+        {
+            "source": {"all_markets": True},
+            "quality": {
+                "scope": [url + "chicago/", url + "boston/"],
+                "accounting": {"candidates": 10},
+            },
+        },
+    )
+
+    def saved_fetcher(bronze, run_manifest, **kwargs):
+        return Fetcher(bronze, run_manifest, replay=snapshot)
+
+    monkeypatch.setattr("backend.pipeline.Fetcher", saved_fetcher)
+    result = run_pipeline(tmp_path, all_markets=True)
+    assert result.accepted == 4
+    assert not result.published
+    assert json.loads((tmp_path / "latest.json").read_text())["run_id"] == "previous"
+    quality = json.loads(result.report_path.read_text())["quality"]
+    assert "candidate_count_drop_over_20_percent" in quality["blockers"]

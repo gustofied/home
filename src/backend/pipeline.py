@@ -120,8 +120,9 @@ def run_pipeline(
                     reason = "missing_identity"
                 elif candidate.url in seen_urls or candidate.code in seen_codes:
                     reason = "duplicate_candidate"
-                seen_urls.add(candidate.url)
-                seen_codes.add(candidate.code)
+                if candidate.record_level == "facility":
+                    seen_urls.add(candidate.url)
+                    seen_codes.add(candidate.code)
                 if reason:
                     rejected.append(
                         {
@@ -162,12 +163,12 @@ def run_pipeline(
     if from_snapshot is None:
         try:
             previous = json.loads(
-                (
-                    data_dir / "silver" / latest_run(data_dir) / "quality.json"
-                ).read_text()
+                (data_dir / "gold" / latest_run(data_dir) / "report.json").read_text()
             )
-            if previous["scope"] == scope:
-                previous_count = previous["accounting"]["candidates"]
+            same_scope = previous["quality"]["scope"] == scope
+            full_portfolio = all_markets and previous["source"]["all_markets"]
+            if same_scope or full_portfolio:
+                previous_count = previous["quality"]["accounting"]["candidates"]
         except (FileNotFoundError, ValueError, KeyError):
             pass
     candidate_dicts = [asdict(candidate) for candidate in candidates]
@@ -213,6 +214,30 @@ def run_pipeline(
     write_jsonl(silver / "candidates.jsonl", candidate_dicts)
     write_jsonl(silver / "observations.jsonl", observations)
     write_jsonl(silver / "rejected.jsonl", rejected)
+    write_json(
+        silver / "source_manifest.json",
+        {
+            "data_kind": manifest["data_kind"],
+            "parser_version": PARSER_VERSION,
+            "pages": [
+                {
+                    key: page[key]
+                    for key in (
+                        "requested_url",
+                        "final_url",
+                        "fetched_at",
+                        "status_code",
+                        "sha256",
+                    )
+                }
+                | {
+                    "last_modified": page["headers"].get("last-modified"),
+                    "etag": page["headers"].get("etag"),
+                }
+                for page in manifest["pages"]
+            ],
+        },
+    )
     write_csv(
         silver / "market_totals.csv",
         [o for o in observations if o["record_level"] != "facility"],

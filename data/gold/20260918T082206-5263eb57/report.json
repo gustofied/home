@@ -1,0 +1,2067 @@
+{
+  "as_of": "2026-09-18T08:19:10.679689Z",
+  "breakdowns": {
+    "area_power_scatter": [
+      {
+        "capacity_density_w_per_sqft": 56.29838142153413,
+        "critical_it_mw": 0.8,
+        "facility_code": "ACT1",
+        "it_area_sqft": 14210,
+        "market": "waco"
+      },
+      {
+        "capacity_density_w_per_sqft": 185.57239937271302,
+        "critical_it_mw": 7.1,
+        "facility_code": "ATL1",
+        "it_area_sqft": 38260,
+        "market": "atlanta"
+      },
+      {
+        "capacity_density_w_per_sqft": 76.03117278084015,
+        "critical_it_mw": 4.0,
+        "facility_code": "ATL2",
+        "it_area_sqft": 52610,
+        "market": "atlanta"
+      },
+      {
+        "capacity_density_w_per_sqft": 126.34238787113077,
+        "critical_it_mw": 6.0,
+        "facility_code": "ATL3",
+        "it_area_sqft": 47490,
+        "market": "atlanta"
+      },
+      {
+        "capacity_density_w_per_sqft": 188.0494570071929,
+        "critical_it_mw": 40.0,
+        "facility_code": "ATL4",
+        "it_area_sqft": 212710,
+        "market": "atlanta"
+      },
+      {
+        "capacity_density_w_per_sqft": 299.62546816479403,
+        "critical_it_mw": 48.0,
+        "facility_code": "ATL5",
+        "it_area_sqft": 160200,
+        "market": "atlanta"
+      },
+      {
+        "capacity_density_w_per_sqft": 300.0,
+        "critical_it_mw": 72.0,
+        "facility_code": "ATL6",
+        "it_area_sqft": 240000,
+        "market": "atlanta"
+      },
+      {
+        "capacity_density_w_per_sqft": 51.46124523506989,
+        "critical_it_mw": 0.405,
+        "facility_code": "AUS1",
+        "it_area_sqft": 7870,
+        "market": "austin"
+      },
+      {
+        "capacity_density_w_per_sqft": 64.43298969072166,
+        "critical_it_mw": 0.5,
+        "facility_code": "BOS1",
+        "it_area_sqft": 7760,
+        "market": "boston"
+      },
+      {
+        "capacity_density_w_per_sqft": 53.763440860215056,
+        "critical_it_mw": 0.4,
+        "facility_code": "CLE1",
+        "it_area_sqft": 7440,
+        "market": "cleveland"
+      },
+      {
+        "capacity_density_w_per_sqft": 82.71298593879239,
+        "critical_it_mw": 2.0,
+        "facility_code": "DEN1",
+        "it_area_sqft": 24180,
+        "market": "denver"
+      },
+      {
+        "capacity_density_w_per_sqft": 126.94382735639479,
+        "critical_it_mw": 4.0,
+        "facility_code": "DEN2",
+        "it_area_sqft": 31510,
+        "market": "denver"
+      },
+      {
+        "capacity_density_w_per_sqft": 124.22360248447205,
+        "critical_it_mw": 2.0,
+        "facility_code": "DEN3",
+        "it_area_sqft": 16100,
+        "market": "denver"
+      },
+      {
+        "capacity_density_w_per_sqft": 50.55611729019211,
+        "critical_it_mw": 0.5,
+        "facility_code": "DEN4",
+        "it_area_sqft": 9890,
+        "market": "denver"
+      },
+      {
+        "capacity_density_w_per_sqft": 285.7142857142857,
+        "critical_it_mw": 16.0,
+        "facility_code": "DEN5",
+        "it_area_sqft": 56000,
+        "market": "denver"
+      },
+      {
+        "capacity_density_w_per_sqft": 48.19277108433735,
+        "critical_it_mw": 7.0,
+        "facility_code": "DFW1",
+        "it_area_sqft": 145250,
+        "market": "dallas"
+      },
+      {
+        "capacity_density_w_per_sqft": 300.0,
+        "critical_it_mw": 60.0,
+        "facility_code": "DFW10",
+        "it_area_sqft": 200000,
+        "market": "dallas"
+      },
+      {
+        "capacity_density_w_per_sqft": 300.0,
+        "critical_it_mw": 60.0,
+        "facility_code": "DFW11",
+        "it_area_sqft": 200000,
+        "market": "dallas"
+      },
+      {
+        "capacity_density_w_per_sqft": 300.0,
+        "critical_it_mw": 60.0,
+        "facility_code": "DFW12",
+        "it_area_sqft": 200000,
+        "market": "dallas"
+      },
+      {
+        "capacity_density_w_per_sqft": 104.09101912369886,
+        "critical_it_mw": 4.3,
+        "facility_code": "DFW2",
+        "it_area_sqft": 41310,
+        "market": "dallas"
+      },
+      {
+        "capacity_density_w_per_sqft": 166.13595458950576,
+        "critical_it_mw": 12.0,
+        "facility_code": "DFW3",
+        "it_area_sqft": 72230,
+        "market": "dallas"
+      },
+      {
+        "capacity_density_w_per_sqft": 111.42061281337047,
+        "critical_it_mw": 4.0,
+        "facility_code": "DFW4",
+        "it_area_sqft": 35900,
+        "market": "dallas"
+      },
+      {
+        "capacity_density_w_per_sqft": 75.05773672055427,
+        "critical_it_mw": 1.3,
+        "facility_code": "DFW5",
+        "it_area_sqft": 17320,
+        "market": "dallas"
+      },
+      {
+        "capacity_density_w_per_sqft": 53.74203821656051,
+        "critical_it_mw": 0.675,
+        "facility_code": "DFW6",
+        "it_area_sqft": 12560,
+        "market": "dallas"
+      },
+      {
+        "capacity_density_w_per_sqft": 58.49408836341008,
+        "critical_it_mw": 0.94,
+        "facility_code": "DFW7",
+        "it_area_sqft": 16070,
+        "market": "dallas"
+      },
+      {
+        "capacity_density_w_per_sqft": 317.46031746031747,
+        "critical_it_mw": 40.0,
+        "facility_code": "DFW8",
+        "it_area_sqft": 126000,
+        "market": "dallas"
+      },
+      {
+        "capacity_density_w_per_sqft": 300.0,
+        "critical_it_mw": 60.0,
+        "facility_code": "DFW9",
+        "it_area_sqft": 200000,
+        "market": "dallas"
+      },
+      {
+        "capacity_density_w_per_sqft": 49.47613504074505,
+        "critical_it_mw": 1.7,
+        "facility_code": "EWR1",
+        "it_area_sqft": 34360,
+        "market": "new-jersey"
+      },
+      {
+        "capacity_density_w_per_sqft": 132.80212483399734,
+        "critical_it_mw": 3.0,
+        "facility_code": "EWR2",
+        "it_area_sqft": 22590,
+        "market": "new-jersey"
+      },
+      {
+        "capacity_density_w_per_sqft": 141.57364552137219,
+        "critical_it_mw": 15.6,
+        "facility_code": "HOU1",
+        "it_area_sqft": 110190,
+        "market": "houston"
+      },
+      {
+        "capacity_density_w_per_sqft": 113.17907444668008,
+        "critical_it_mw": 9.0,
+        "facility_code": "HOU2",
+        "it_area_sqft": 79520,
+        "market": "houston"
+      },
+      {
+        "capacity_density_w_per_sqft": 155.27950310559007,
+        "critical_it_mw": 6.5,
+        "facility_code": "HOU3",
+        "it_area_sqft": 41860,
+        "market": "houston"
+      },
+      {
+        "capacity_density_w_per_sqft": 81.52173913043478,
+        "critical_it_mw": 5.25,
+        "facility_code": "HOU5",
+        "it_area_sqft": 64400,
+        "market": "houston"
+      },
+      {
+        "capacity_density_w_per_sqft": 116.02015703738428,
+        "critical_it_mw": 9.9,
+        "facility_code": "IAD1",
+        "it_area_sqft": 85330,
+        "market": "northern-virginia"
+      },
+      {
+        "capacity_density_w_per_sqft": 73.72818874416319,
+        "critical_it_mw": 3.0,
+        "facility_code": "IAD2",
+        "it_area_sqft": 40690,
+        "market": "northern-virginia"
+      },
+      {
+        "capacity_density_w_per_sqft": 200.0,
+        "critical_it_mw": 40.0,
+        "facility_code": "IAD3",
+        "it_area_sqft": 200000,
+        "market": "northern-virginia"
+      },
+      {
+        "capacity_density_w_per_sqft": 285.7142857142857,
+        "critical_it_mw": 20.0,
+        "facility_code": "IAD4",
+        "it_area_sqft": 70000,
+        "market": "northern-virginia"
+      },
+      {
+        "capacity_density_w_per_sqft": 313.1360576170346,
+        "critical_it_mw": 72.0,
+        "facility_code": "IAD5",
+        "it_area_sqft": 229932,
+        "market": "northern-virginia"
+      },
+      {
+        "capacity_density_w_per_sqft": 313.1360576170346,
+        "critical_it_mw": 120.0,
+        "facility_code": "IAD6",
+        "it_area_sqft": 383220,
+        "market": "northern-virginia"
+      },
+      {
+        "capacity_density_w_per_sqft": 123.89380530973452,
+        "critical_it_mw": 2.1,
+        "facility_code": "IND1",
+        "it_area_sqft": 16950,
+        "market": "indianapolis"
+      },
+      {
+        "capacity_density_w_per_sqft": 120.65637065637065,
+        "critical_it_mw": 3.75,
+        "facility_code": "IND2",
+        "it_area_sqft": 31080,
+        "market": "indianapolis"
+      },
+      {
+        "capacity_density_w_per_sqft": 58.39899588592149,
+        "critical_it_mw": 3.35,
+        "facility_code": "LAS1",
+        "it_area_sqft": 57364,
+        "market": "las-vegas"
+      },
+      {
+        "capacity_density_w_per_sqft": 108.22510822510823,
+        "critical_it_mw": 2.0,
+        "facility_code": "LAX1",
+        "it_area_sqft": 18480,
+        "market": "los-angeles"
+      },
+      {
+        "capacity_density_w_per_sqft": 244.27480916030535,
+        "critical_it_mw": 32.0,
+        "facility_code": "LAX2",
+        "it_area_sqft": 131000,
+        "market": "los-angeles"
+      },
+      {
+        "capacity_density_w_per_sqft": 30.91060985797828,
+        "critical_it_mw": 0.74,
+        "facility_code": "LGA1",
+        "it_area_sqft": 23940,
+        "market": "new-york-city"
+      },
+      {
+        "capacity_density_w_per_sqft": 66.66666666666667,
+        "critical_it_mw": 0.68,
+        "facility_code": "LGA2",
+        "it_area_sqft": 10200,
+        "market": "new-york-city"
+      },
+      {
+        "capacity_density_w_per_sqft": 181.8181818181818,
+        "critical_it_mw": 20.0,
+        "facility_code": "LGA3",
+        "it_area_sqft": 110000,
+        "market": "new-york-city"
+      },
+      {
+        "capacity_density_w_per_sqft": 181.8181818181818,
+        "critical_it_mw": 10.0,
+        "facility_code": "LGA4",
+        "it_area_sqft": 55000,
+        "market": "new-york-city"
+      },
+      {
+        "capacity_density_w_per_sqft": 138.46153846153845,
+        "critical_it_mw": 3.6,
+        "facility_code": "LHR1",
+        "it_area_sqft": 26000,
+        "market": "london"
+      },
+      {
+        "capacity_density_w_per_sqft": 173.7619461337967,
+        "critical_it_mw": 2.0,
+        "facility_code": "MCI2",
+        "it_area_sqft": 11510,
+        "market": "kansas-city"
+      },
+      {
+        "capacity_density_w_per_sqft": 182.76425561193773,
+        "critical_it_mw": 12.75,
+        "facility_code": "MCI3",
+        "it_area_sqft": 69762,
+        "market": "kansas-city"
+      },
+      {
+        "capacity_density_w_per_sqft": 63.469675599435824,
+        "critical_it_mw": 0.45,
+        "facility_code": "MEM1",
+        "it_area_sqft": 7090,
+        "market": "memphis"
+      },
+      {
+        "capacity_density_w_per_sqft": 145.05893019038984,
+        "critical_it_mw": 1.6,
+        "facility_code": "MIA1",
+        "it_area_sqft": 11030,
+        "market": "miami"
+      },
+      {
+        "capacity_density_w_per_sqft": 51.448170731707314,
+        "critical_it_mw": 1.35,
+        "facility_code": "MSP1",
+        "it_area_sqft": 26240,
+        "market": "minneapolis"
+      },
+      {
+        "capacity_density_w_per_sqft": 102.33319688907082,
+        "critical_it_mw": 5.0,
+        "facility_code": "MSP2",
+        "it_area_sqft": 48860,
+        "market": "minneapolis"
+      },
+      {
+        "capacity_density_w_per_sqft": 109.44777516994807,
+        "critical_it_mw": 9.0,
+        "facility_code": "MSP3",
+        "it_area_sqft": 82231,
+        "market": "minneapolis"
+      },
+      {
+        "capacity_density_w_per_sqft": 95.34883720930233,
+        "critical_it_mw": 0.779,
+        "facility_code": "MSP4",
+        "it_area_sqft": 8170,
+        "market": "minneapolis"
+      },
+      {
+        "capacity_density_w_per_sqft": 98.71668311944718,
+        "critical_it_mw": 1.0,
+        "facility_code": "ORD1",
+        "it_area_sqft": 10130,
+        "market": "chicago"
+      },
+      {
+        "capacity_density_w_per_sqft": 174.36791630340016,
+        "critical_it_mw": 2.0,
+        "facility_code": "ORD2",
+        "it_area_sqft": 11470,
+        "market": "chicago"
+      },
+      {
+        "capacity_density_w_per_sqft": 93.26424870466322,
+        "critical_it_mw": 2.7,
+        "facility_code": "ORD3",
+        "it_area_sqft": 28950,
+        "market": "chicago"
+      },
+      {
+        "capacity_density_w_per_sqft": 112.88865952780286,
+        "critical_it_mw": 8.75,
+        "facility_code": "ORD4",
+        "it_area_sqft": 77510,
+        "market": "chicago"
+      },
+      {
+        "capacity_density_w_per_sqft": 43.81443298969072,
+        "critical_it_mw": 0.34,
+        "facility_code": "PHL1",
+        "it_area_sqft": 7760,
+        "market": "philadelphia"
+      },
+      {
+        "capacity_density_w_per_sqft": 61.76853055916775,
+        "critical_it_mw": 1.9,
+        "facility_code": "PIT1",
+        "it_area_sqft": 30760,
+        "market": "pittsburgh"
+      },
+      {
+        "capacity_density_w_per_sqft": 106.15711252653928,
+        "critical_it_mw": 5.0,
+        "facility_code": "PIT2",
+        "it_area_sqft": 47100,
+        "market": "pittsburgh"
+      },
+      {
+        "capacity_density_w_per_sqft": 130.3426926627926,
+        "critical_it_mw": 7.2,
+        "facility_code": "SAN1",
+        "it_area_sqft": 55239,
+        "market": "san-diego"
+      },
+      {
+        "capacity_density_w_per_sqft": 51.851851851851855,
+        "critical_it_mw": 0.21,
+        "facility_code": "SEA1",
+        "it_area_sqft": 4050,
+        "market": "seattle"
+      },
+      {
+        "capacity_density_w_per_sqft": 106.23229461756374,
+        "critical_it_mw": 3.0,
+        "facility_code": "SEA2",
+        "it_area_sqft": 28240,
+        "market": "seattle"
+      },
+      {
+        "capacity_density_w_per_sqft": 179.85611510791367,
+        "critical_it_mw": 3.0,
+        "facility_code": "SFO1",
+        "it_area_sqft": 16680,
+        "market": "silicon-valley"
+      },
+      {
+        "capacity_density_w_per_sqft": 47.1253534401508,
+        "critical_it_mw": 0.5,
+        "facility_code": "SLC1",
+        "it_area_sqft": 10610,
+        "market": "salt-lake-city"
+      },
+      {
+        "capacity_density_w_per_sqft": 74.16704701049748,
+        "critical_it_mw": 3.25,
+        "facility_code": "SLC2",
+        "it_area_sqft": 43820,
+        "market": "salt-lake-city"
+      },
+      {
+        "capacity_density_w_per_sqft": 125.4930082466834,
+        "critical_it_mw": 7.0,
+        "facility_code": "SLC3",
+        "it_area_sqft": 55780,
+        "market": "salt-lake-city"
+      },
+      {
+        "capacity_density_w_per_sqft": 176.95274831243972,
+        "critical_it_mw": 3.67,
+        "facility_code": "SLC4",
+        "it_area_sqft": 20740,
+        "market": "salt-lake-city"
+      },
+      {
+        "capacity_density_w_per_sqft": 203.334688897926,
+        "critical_it_mw": 10.0,
+        "facility_code": "SLC5",
+        "it_area_sqft": 49180,
+        "market": "salt-lake-city"
+      },
+      {
+        "capacity_density_w_per_sqft": 249.29178470254956,
+        "critical_it_mw": 22.0,
+        "facility_code": "SLC6",
+        "it_area_sqft": 88250,
+        "market": "salt-lake-city"
+      },
+      {
+        "capacity_density_w_per_sqft": 71.89542483660131,
+        "critical_it_mw": 2.64,
+        "facility_code": "SNA1",
+        "it_area_sqft": 36720,
+        "market": "irvine"
+      },
+      {
+        "capacity_density_w_per_sqft": 150.51740357478835,
+        "critical_it_mw": 8.0,
+        "facility_code": "SNA2",
+        "it_area_sqft": 53150,
+        "market": "irvine"
+      }
+    ],
+    "density_outliers": [],
+    "markets": [
+      {
+        "capacity_share": 0.30318741881919004,
+        "critical_it_mw": 310.215,
+        "facility_count": 12,
+        "it_area_sqft": 1266640,
+        "market": "dallas"
+      },
+      {
+        "capacity_share": 0.2588989805302884,
+        "critical_it_mw": 264.9,
+        "facility_count": 6,
+        "it_area_sqft": 1009172,
+        "market": "northern-virginia"
+      },
+      {
+        "capacity_share": 0.17308799340095918,
+        "critical_it_mw": 177.1,
+        "facility_count": 6,
+        "it_area_sqft": 751270,
+        "market": "atlanta"
+      },
+      {
+        "capacity_share": 0.045368405723729674,
+        "critical_it_mw": 46.42,
+        "facility_count": 6,
+        "it_area_sqft": 268380,
+        "market": "salt-lake-city"
+      },
+      {
+        "capacity_share": 0.035526530548418214,
+        "critical_it_mw": 36.35,
+        "facility_count": 4,
+        "it_area_sqft": 295970,
+        "market": "houston"
+      },
+      {
+        "capacity_share": 0.033229767225480586,
+        "critical_it_mw": 34.0,
+        "facility_count": 2,
+        "it_area_sqft": 149480,
+        "market": "los-angeles"
+      },
+      {
+        "capacity_share": 0.03070821430072353,
+        "critical_it_mw": 31.42,
+        "facility_count": 4,
+        "it_area_sqft": 199140,
+        "market": "new-york-city"
+      },
+      {
+        "capacity_share": 0.023944979324243363,
+        "critical_it_mw": 24.5,
+        "facility_count": 5,
+        "it_area_sqft": 137680,
+        "market": "denver"
+      },
+      {
+        "capacity_share": 0.01576361516411107,
+        "critical_it_mw": 16.129,
+        "facility_count": 4,
+        "it_area_sqft": 165501,
+        "market": "minneapolis"
+      },
+      {
+        "capacity_share": 0.014415854899289373,
+        "critical_it_mw": 14.75,
+        "facility_count": 2,
+        "it_area_sqft": 81272,
+        "market": "kansas-city"
+      },
+      {
+        "capacity_share": 0.014122651070829249,
+        "critical_it_mw": 14.45,
+        "facility_count": 4,
+        "it_area_sqft": 128060,
+        "market": "chicago"
+      },
+      {
+        "capacity_share": 0.01039896244938569,
+        "critical_it_mw": 10.64,
+        "facility_count": 2,
+        "it_area_sqft": 89870,
+        "market": "irvine"
+      },
+      {
+        "capacity_share": 0.007036891883042948,
+        "critical_it_mw": 7.2,
+        "facility_count": 1,
+        "it_area_sqft": 55239,
+        "market": "san-diego"
+      },
+      {
+        "capacity_share": 0.0067436880545828255,
+        "critical_it_mw": 6.9,
+        "facility_count": 2,
+        "it_area_sqft": 77860,
+        "market": "pittsburgh"
+      },
+      {
+        "capacity_share": 0.005717474654972395,
+        "critical_it_mw": 5.85,
+        "facility_count": 2,
+        "it_area_sqft": 48030,
+        "market": "indianapolis"
+      },
+      {
+        "capacity_share": 0.0045935266458752575,
+        "critical_it_mw": 4.7,
+        "facility_count": 2,
+        "it_area_sqft": 56950,
+        "market": "new-jersey"
+      },
+      {
+        "capacity_share": 0.003518445941521474,
+        "critical_it_mw": 3.6,
+        "facility_count": 1,
+        "it_area_sqft": 26000,
+        "market": "london"
+      },
+      {
+        "capacity_share": 0.0032741094178047048,
+        "critical_it_mw": 3.35,
+        "facility_count": 1,
+        "it_area_sqft": 57364,
+        "market": "las-vegas"
+      },
+      {
+        "capacity_share": 0.003137280964523314,
+        "critical_it_mw": 3.21,
+        "facility_count": 2,
+        "it_area_sqft": 32290,
+        "market": "seattle"
+      },
+      {
+        "capacity_share": 0.002932038284601228,
+        "critical_it_mw": 3.0,
+        "facility_count": 1,
+        "it_area_sqft": 16680,
+        "market": "silicon-valley"
+      },
+      {
+        "capacity_share": 0.0015637537517873218,
+        "critical_it_mw": 1.6,
+        "facility_count": 1,
+        "it_area_sqft": 11030,
+        "market": "miami"
+      },
+      {
+        "capacity_share": 0.0007818768758936609,
+        "critical_it_mw": 0.8,
+        "facility_count": 1,
+        "it_area_sqft": 14210,
+        "market": "waco"
+      },
+      {
+        "capacity_share": 0.000488673047433538,
+        "critical_it_mw": 0.5,
+        "facility_count": 1,
+        "it_area_sqft": 7760,
+        "market": "boston"
+      },
+      {
+        "capacity_share": 0.00043980574269018424,
+        "critical_it_mw": 0.45,
+        "facility_count": 1,
+        "it_area_sqft": 7090,
+        "market": "memphis"
+      },
+      {
+        "capacity_share": 0.00039582516842116583,
+        "critical_it_mw": 0.405,
+        "facility_count": 1,
+        "it_area_sqft": 7870,
+        "market": "austin"
+      },
+      {
+        "capacity_share": 0.00039093843794683046,
+        "critical_it_mw": 0.4,
+        "facility_count": 1,
+        "it_area_sqft": 7440,
+        "market": "cleveland"
+      },
+      {
+        "capacity_share": 0.00033229767225480587,
+        "critical_it_mw": 0.34,
+        "facility_count": 1,
+        "it_area_sqft": 7760,
+        "market": "philadelphia"
+      }
+    ]
+  },
+  "methodology": {
+    "canonical_values": "Detail main figures take precedence over repeated detail specifications. Market-card values are retained as comparison evidence, never as fallback for missing required detail values.",
+    "correlation": "Pearson on values; Spearman as Pearson on average ranks. Descriptive associations only; withheld for n < 5 or constant inputs.",
+    "density_formula": "critical_it_mw * 1000000 / it_area_sqft",
+    "density_meaning": "Advertised capacity per IT floor area, not measured consumption, utilization, or energy efficiency.",
+    "limitations": [
+      "Single operator's advertised inventory, not global market share.",
+      "Operating, planned and expansion status is not consistently available; totals are not confirmed operational capacity.",
+      "Retrieval time is not source freshness. Last-Modified, when supplied, is stored in the Bronze manifest and is not necessarily metric freshness.",
+      "Campus/market aggregates are excluded from facility rows. Missing values are never imputed as zero.",
+      "Uncertain or incomplete facilities are rejected visibly; failed quality gates never replace the published run.",
+      "Publicly accessible source; no open-data license asserted. Full HTML stays local."
+    ],
+    "outliers": "Tukey 1.5 IQR fences on capacity density for n >= 5; flagged records remain included.",
+    "question": "How does advertised critical IT load scale with IT floor area, and in which DataBank markets is that capacity concentrated?",
+    "reconciliation": "All market/portfolio claims compared separately. Rounding tolerance is half the last displayed digit; conflicts remain visible and do not on their own invalidate otherwise complete records."
+  },
+  "quality": {
+    "accounting": {
+      "accepted": 76,
+      "candidates": 76,
+      "reconciled": true,
+      "rejected": 0
+    },
+    "blockers": [],
+    "candidate_count_change": null,
+    "card_detail_conflicts": [],
+    "duplicates": {
+      "codes": {},
+      "urls": {}
+    },
+    "failures": [],
+    "gate": "passed",
+    "missingness": {
+      "address_raw": 0,
+      "campus_name": 48,
+      "onsite_carriers": 6
+    },
+    "missingness_denominator": 76,
+    "missingness_notes": {
+      "campus_name": "Null means no explicit campus grouping in the market listing; it does not invalidate a facility."
+    },
+    "parse_issues": [
+      {
+        "error": "Unrecognized power value/unit: '240'",
+        "field": "critical_it_mw",
+        "origin": "headline",
+        "raw_label": "Critical IT Load",
+        "raw_value": "240",
+        "record_level": "campus",
+        "source_url": "https://www.databank.com/data-centers/dallas/",
+        "type": "unrecognized_value",
+        "value": null
+      }
+    ],
+    "reconciliation": [
+      {
+        "difference": 0,
+        "facility_sum": 76,
+        "field": "facility_count",
+        "origin": "headline",
+        "raw_label": "Total Data Centers",
+        "raw_value": "76",
+        "record_level": "portfolio",
+        "rounding_tolerance": 0.0,
+        "source_url": "https://www.databank.com/data-centers/",
+        "status": "exact",
+        "value": 76
+      },
+      {
+        "difference": -3992,
+        "facility_sum": 4976008,
+        "field": "it_area_sqft",
+        "origin": "headline",
+        "raw_label": "IT Square Footage",
+        "raw_value": "4.98M",
+        "record_level": "portfolio",
+        "rounding_tolerance": 5000.0,
+        "source_url": "https://www.databank.com/data-centers/",
+        "status": "rounding",
+        "value": 4980000
+      },
+      {
+        "difference": 23.179,
+        "facility_sum": 1023.179,
+        "field": "critical_it_mw",
+        "origin": "headline",
+        "raw_label": "Critical IT Load",
+        "raw_value": "1GW",
+        "record_level": "portfolio",
+        "rounding_tolerance": 500.0,
+        "source_url": "https://www.databank.com/data-centers/",
+        "status": "rounding",
+        "value": 1000.0
+      },
+      {
+        "difference": 0,
+        "facility_sum": 6,
+        "field": "facility_count",
+        "origin": "headline",
+        "raw_label": "Total Data Centers",
+        "raw_value": "6",
+        "record_level": "market",
+        "rounding_tolerance": 0.0,
+        "source_url": "https://www.databank.com/data-centers/atlanta/",
+        "status": "exact",
+        "value": 6
+      },
+      {
+        "difference": 0,
+        "facility_sum": 751270,
+        "field": "it_area_sqft",
+        "origin": "headline",
+        "raw_label": "IT Square Footage",
+        "raw_value": "751,270",
+        "record_level": "market",
+        "rounding_tolerance": 0.5,
+        "source_url": "https://www.databank.com/data-centers/atlanta/",
+        "status": "exact",
+        "value": 751270
+      },
+      {
+        "difference": 0.0,
+        "facility_sum": 177.1,
+        "field": "critical_it_mw",
+        "origin": "headline",
+        "raw_label": "Critical IT Load",
+        "raw_value": "177.1MW",
+        "record_level": "market",
+        "rounding_tolerance": 0.05,
+        "source_url": "https://www.databank.com/data-centers/atlanta/",
+        "status": "exact",
+        "value": 177.1
+      },
+      {
+        "difference": 0,
+        "facility_sum": 1,
+        "field": "facility_count",
+        "origin": "headline",
+        "raw_label": "Total Data Centers",
+        "raw_value": "1",
+        "record_level": "market",
+        "rounding_tolerance": 0.0,
+        "source_url": "https://www.databank.com/data-centers/austin/",
+        "status": "exact",
+        "value": 1
+      },
+      {
+        "difference": 0,
+        "facility_sum": 7870,
+        "field": "it_area_sqft",
+        "origin": "headline",
+        "raw_label": "IT Square Footage",
+        "raw_value": "7,870",
+        "record_level": "market",
+        "rounding_tolerance": 0.5,
+        "source_url": "https://www.databank.com/data-centers/austin/",
+        "status": "exact",
+        "value": 7870
+      },
+      {
+        "difference": 0.005,
+        "facility_sum": 0.405,
+        "field": "critical_it_mw",
+        "origin": "headline",
+        "raw_label": "Critical IT Load",
+        "raw_value": "0.4MW",
+        "record_level": "market",
+        "rounding_tolerance": 0.05,
+        "source_url": "https://www.databank.com/data-centers/austin/",
+        "status": "rounding",
+        "value": 0.4
+      },
+      {
+        "difference": 0,
+        "facility_sum": 1,
+        "field": "facility_count",
+        "origin": "headline",
+        "raw_label": "Total Data Centers",
+        "raw_value": "1",
+        "record_level": "market",
+        "rounding_tolerance": 0.0,
+        "source_url": "https://www.databank.com/data-centers/boston/",
+        "status": "exact",
+        "value": 1
+      },
+      {
+        "difference": 0,
+        "facility_sum": 7760,
+        "field": "it_area_sqft",
+        "origin": "headline",
+        "raw_label": "IT Square Footage",
+        "raw_value": "7,760",
+        "record_level": "market",
+        "rounding_tolerance": 0.5,
+        "source_url": "https://www.databank.com/data-centers/boston/",
+        "status": "exact",
+        "value": 7760
+      },
+      {
+        "difference": 0.0,
+        "facility_sum": 0.5,
+        "field": "critical_it_mw",
+        "origin": "headline",
+        "raw_label": "Critical IT Load",
+        "raw_value": "0.5MW",
+        "record_level": "market",
+        "rounding_tolerance": 0.05,
+        "source_url": "https://www.databank.com/data-centers/boston/",
+        "status": "exact",
+        "value": 0.5
+      },
+      {
+        "difference": 0,
+        "facility_sum": 4,
+        "field": "facility_count",
+        "origin": "headline",
+        "raw_label": "Total Data Centers",
+        "raw_value": "4",
+        "record_level": "market",
+        "rounding_tolerance": 0.0,
+        "source_url": "https://www.databank.com/data-centers/chicago/",
+        "status": "exact",
+        "value": 4
+      },
+      {
+        "difference": 0,
+        "facility_sum": 128060,
+        "field": "it_area_sqft",
+        "origin": "headline",
+        "raw_label": "IT Square Footage",
+        "raw_value": "128,060",
+        "record_level": "market",
+        "rounding_tolerance": 0.5,
+        "source_url": "https://www.databank.com/data-centers/chicago/",
+        "status": "exact",
+        "value": 128060
+      },
+      {
+        "difference": -0.05,
+        "facility_sum": 14.45,
+        "field": "critical_it_mw",
+        "origin": "headline",
+        "raw_label": "Critical IT Load",
+        "raw_value": "14.5MW",
+        "record_level": "market",
+        "rounding_tolerance": 0.05,
+        "source_url": "https://www.databank.com/data-centers/chicago/",
+        "status": "rounding",
+        "value": 14.5
+      },
+      {
+        "difference": 0.65,
+        "facility_sum": 14.45,
+        "field": "critical_it_mw",
+        "origin": "faq",
+        "raw_label": "Explicit total in FAQ",
+        "raw_value": "13.8MW",
+        "record_level": "market",
+        "rounding_tolerance": 0.05,
+        "source_url": "https://www.databank.com/data-centers/chicago/",
+        "status": "conflict",
+        "value": 13.8
+      },
+      {
+        "difference": 0,
+        "facility_sum": 128060,
+        "field": "it_area_sqft",
+        "origin": "faq",
+        "raw_label": "Explicit total in FAQ",
+        "raw_value": "128,060",
+        "record_level": "market",
+        "rounding_tolerance": 0.5,
+        "source_url": "https://www.databank.com/data-centers/chicago/",
+        "status": "exact",
+        "value": 128060
+      },
+      {
+        "difference": 0,
+        "facility_sum": 1,
+        "field": "facility_count",
+        "origin": "headline",
+        "raw_label": "Total Data Centers",
+        "raw_value": "1",
+        "record_level": "market",
+        "rounding_tolerance": 0.0,
+        "source_url": "https://www.databank.com/data-centers/cleveland/",
+        "status": "exact",
+        "value": 1
+      },
+      {
+        "difference": 0,
+        "facility_sum": 7440,
+        "field": "it_area_sqft",
+        "origin": "headline",
+        "raw_label": "IT Square Footage",
+        "raw_value": "7,440",
+        "record_level": "market",
+        "rounding_tolerance": 0.5,
+        "source_url": "https://www.databank.com/data-centers/cleveland/",
+        "status": "exact",
+        "value": 7440
+      },
+      {
+        "difference": 0.0,
+        "facility_sum": 0.4,
+        "field": "critical_it_mw",
+        "origin": "headline",
+        "raw_label": "Critical IT Load",
+        "raw_value": "0.4MW",
+        "record_level": "market",
+        "rounding_tolerance": 0.05,
+        "source_url": "https://www.databank.com/data-centers/cleveland/",
+        "status": "exact",
+        "value": 0.4
+      },
+      {
+        "difference": 0,
+        "facility_sum": 12,
+        "field": "facility_count",
+        "origin": "headline",
+        "raw_label": "Total Data Centers",
+        "raw_value": "12",
+        "record_level": "market",
+        "rounding_tolerance": 0.0,
+        "source_url": "https://www.databank.com/data-centers/dallas/",
+        "status": "exact",
+        "value": 12
+      },
+      {
+        "difference": 0,
+        "facility_sum": 1266640,
+        "field": "it_area_sqft",
+        "origin": "headline",
+        "raw_label": "IT Square Footage",
+        "raw_value": "1,266,640",
+        "record_level": "market",
+        "rounding_tolerance": 0.5,
+        "source_url": "https://www.databank.com/data-centers/dallas/",
+        "status": "exact",
+        "value": 1266640
+      },
+      {
+        "difference": 0.015,
+        "facility_sum": 310.215,
+        "field": "critical_it_mw",
+        "origin": "headline",
+        "raw_label": "Critical IT Load",
+        "raw_value": "310.2MW",
+        "record_level": "market",
+        "rounding_tolerance": 0.05,
+        "source_url": "https://www.databank.com/data-centers/dallas/",
+        "status": "rounding",
+        "value": 310.2
+      },
+      {
+        "difference": 0,
+        "facility_sum": 5,
+        "field": "facility_count",
+        "origin": "headline",
+        "raw_label": "Total Data Centers",
+        "raw_value": "5",
+        "record_level": "market",
+        "rounding_tolerance": 0.0,
+        "source_url": "https://www.databank.com/data-centers/denver/",
+        "status": "exact",
+        "value": 5
+      },
+      {
+        "difference": 0,
+        "facility_sum": 137680,
+        "field": "it_area_sqft",
+        "origin": "headline",
+        "raw_label": "IT Square Footage",
+        "raw_value": "137,680",
+        "record_level": "market",
+        "rounding_tolerance": 0.5,
+        "source_url": "https://www.databank.com/data-centers/denver/",
+        "status": "exact",
+        "value": 137680
+      },
+      {
+        "difference": 0.0,
+        "facility_sum": 24.5,
+        "field": "critical_it_mw",
+        "origin": "headline",
+        "raw_label": "Critical IT Load",
+        "raw_value": "24.5MW",
+        "record_level": "market",
+        "rounding_tolerance": 0.05,
+        "source_url": "https://www.databank.com/data-centers/denver/",
+        "status": "exact",
+        "value": 24.5
+      },
+      {
+        "difference": 0,
+        "facility_sum": 4,
+        "field": "facility_count",
+        "origin": "headline",
+        "raw_label": "Total Data Centers",
+        "raw_value": "4",
+        "record_level": "market",
+        "rounding_tolerance": 0.0,
+        "source_url": "https://www.databank.com/data-centers/houston/",
+        "status": "exact",
+        "value": 4
+      },
+      {
+        "difference": 0,
+        "facility_sum": 295970,
+        "field": "it_area_sqft",
+        "origin": "headline",
+        "raw_label": "IT Square Footage",
+        "raw_value": "295,970",
+        "record_level": "market",
+        "rounding_tolerance": 0.5,
+        "source_url": "https://www.databank.com/data-centers/houston/",
+        "status": "exact",
+        "value": 295970
+      },
+      {
+        "difference": -0.05,
+        "facility_sum": 36.35,
+        "field": "critical_it_mw",
+        "origin": "headline",
+        "raw_label": "Critical IT Load",
+        "raw_value": "36.4MW",
+        "record_level": "market",
+        "rounding_tolerance": 0.05,
+        "source_url": "https://www.databank.com/data-centers/houston/",
+        "status": "rounding",
+        "value": 36.4
+      },
+      {
+        "difference": 0,
+        "facility_sum": 2,
+        "field": "facility_count",
+        "origin": "headline",
+        "raw_label": "Total Data Centers",
+        "raw_value": "2",
+        "record_level": "market",
+        "rounding_tolerance": 0.0,
+        "source_url": "https://www.databank.com/data-centers/indianapolis/",
+        "status": "exact",
+        "value": 2
+      },
+      {
+        "difference": 0,
+        "facility_sum": 48030,
+        "field": "it_area_sqft",
+        "origin": "headline",
+        "raw_label": "IT Square Footage",
+        "raw_value": "48,030",
+        "record_level": "market",
+        "rounding_tolerance": 0.5,
+        "source_url": "https://www.databank.com/data-centers/indianapolis/",
+        "status": "exact",
+        "value": 48030
+      },
+      {
+        "difference": -0.05,
+        "facility_sum": 5.85,
+        "field": "critical_it_mw",
+        "origin": "headline",
+        "raw_label": "Critical IT Load",
+        "raw_value": "5.9MW",
+        "record_level": "market",
+        "rounding_tolerance": 0.05,
+        "source_url": "https://www.databank.com/data-centers/indianapolis/",
+        "status": "rounding",
+        "value": 5.9
+      },
+      {
+        "difference": 0,
+        "facility_sum": 2,
+        "field": "facility_count",
+        "origin": "headline",
+        "raw_label": "Total Data Centers",
+        "raw_value": "2",
+        "record_level": "market",
+        "rounding_tolerance": 0.0,
+        "source_url": "https://www.databank.com/data-centers/irvine/",
+        "status": "exact",
+        "value": 2
+      },
+      {
+        "difference": 0,
+        "facility_sum": 89870,
+        "field": "it_area_sqft",
+        "origin": "headline",
+        "raw_label": "IT Square Footage",
+        "raw_value": "89,870",
+        "record_level": "market",
+        "rounding_tolerance": 0.5,
+        "source_url": "https://www.databank.com/data-centers/irvine/",
+        "status": "exact",
+        "value": 89870
+      },
+      {
+        "difference": 0.04,
+        "facility_sum": 10.64,
+        "field": "critical_it_mw",
+        "origin": "headline",
+        "raw_label": "Critical IT Load",
+        "raw_value": "10.6MW",
+        "record_level": "market",
+        "rounding_tolerance": 0.05,
+        "source_url": "https://www.databank.com/data-centers/irvine/",
+        "status": "rounding",
+        "value": 10.6
+      },
+      {
+        "difference": 0,
+        "facility_sum": 89870,
+        "field": "it_area_sqft",
+        "origin": "faq",
+        "raw_label": "Explicit total in FAQ",
+        "raw_value": "89,870",
+        "record_level": "market",
+        "rounding_tolerance": 0.5,
+        "source_url": "https://www.databank.com/data-centers/irvine/",
+        "status": "exact",
+        "value": 89870
+      },
+      {
+        "difference": 0,
+        "facility_sum": 2,
+        "field": "facility_count",
+        "origin": "headline",
+        "raw_label": "Total Data Centers",
+        "raw_value": "2",
+        "record_level": "market",
+        "rounding_tolerance": 0.0,
+        "source_url": "https://www.databank.com/data-centers/kansas-city/",
+        "status": "exact",
+        "value": 2
+      },
+      {
+        "difference": 0,
+        "facility_sum": 81272,
+        "field": "it_area_sqft",
+        "origin": "headline",
+        "raw_label": "IT Square Footage",
+        "raw_value": "81,272",
+        "record_level": "market",
+        "rounding_tolerance": 0.5,
+        "source_url": "https://www.databank.com/data-centers/kansas-city/",
+        "status": "exact",
+        "value": 81272
+      },
+      {
+        "difference": -0.05,
+        "facility_sum": 14.75,
+        "field": "critical_it_mw",
+        "origin": "headline",
+        "raw_label": "Critical IT Load",
+        "raw_value": "14.8MW",
+        "record_level": "market",
+        "rounding_tolerance": 0.05,
+        "source_url": "https://www.databank.com/data-centers/kansas-city/",
+        "status": "rounding",
+        "value": 14.8
+      },
+      {
+        "difference": 0,
+        "facility_sum": 1,
+        "field": "facility_count",
+        "origin": "headline",
+        "raw_label": "Total Data Centers",
+        "raw_value": "1",
+        "record_level": "market",
+        "rounding_tolerance": 0.0,
+        "source_url": "https://www.databank.com/data-centers/las-vegas/",
+        "status": "exact",
+        "value": 1
+      },
+      {
+        "difference": 0,
+        "facility_sum": 57364,
+        "field": "it_area_sqft",
+        "origin": "headline",
+        "raw_label": "IT Square Footage",
+        "raw_value": "57,364",
+        "record_level": "market",
+        "rounding_tolerance": 0.5,
+        "source_url": "https://www.databank.com/data-centers/las-vegas/",
+        "status": "exact",
+        "value": 57364
+      },
+      {
+        "difference": -0.05,
+        "facility_sum": 3.35,
+        "field": "critical_it_mw",
+        "origin": "headline",
+        "raw_label": "Critical IT Load",
+        "raw_value": "3.4MW",
+        "record_level": "market",
+        "rounding_tolerance": 0.05,
+        "source_url": "https://www.databank.com/data-centers/las-vegas/",
+        "status": "rounding",
+        "value": 3.4
+      },
+      {
+        "difference": 0,
+        "facility_sum": 1,
+        "field": "facility_count",
+        "origin": "headline",
+        "raw_label": "Total Data Centers",
+        "raw_value": "1",
+        "record_level": "market",
+        "rounding_tolerance": 0.0,
+        "source_url": "https://www.databank.com/data-centers/london/",
+        "status": "exact",
+        "value": 1
+      },
+      {
+        "difference": 0,
+        "facility_sum": 26000,
+        "field": "it_area_sqft",
+        "origin": "headline",
+        "raw_label": "IT Square Footage",
+        "raw_value": "26,000",
+        "record_level": "market",
+        "rounding_tolerance": 0.5,
+        "source_url": "https://www.databank.com/data-centers/london/",
+        "status": "exact",
+        "value": 26000
+      },
+      {
+        "difference": 0.0,
+        "facility_sum": 3.6,
+        "field": "critical_it_mw",
+        "origin": "headline",
+        "raw_label": "Critical IT Load",
+        "raw_value": "3.6MW",
+        "record_level": "market",
+        "rounding_tolerance": 0.05,
+        "source_url": "https://www.databank.com/data-centers/london/",
+        "status": "exact",
+        "value": 3.6
+      },
+      {
+        "difference": 0,
+        "facility_sum": 2,
+        "field": "facility_count",
+        "origin": "headline",
+        "raw_label": "Total Data Centers",
+        "raw_value": "2",
+        "record_level": "market",
+        "rounding_tolerance": 0.0,
+        "source_url": "https://www.databank.com/data-centers/los-angeles/",
+        "status": "exact",
+        "value": 2
+      },
+      {
+        "difference": 0,
+        "facility_sum": 149480,
+        "field": "it_area_sqft",
+        "origin": "headline",
+        "raw_label": "IT Square Footage",
+        "raw_value": "149,480",
+        "record_level": "market",
+        "rounding_tolerance": 0.5,
+        "source_url": "https://www.databank.com/data-centers/los-angeles/",
+        "status": "exact",
+        "value": 149480
+      },
+      {
+        "difference": 0.0,
+        "facility_sum": 34.0,
+        "field": "critical_it_mw",
+        "origin": "headline",
+        "raw_label": "Critical IT Load",
+        "raw_value": "34MW",
+        "record_level": "market",
+        "rounding_tolerance": 0.5,
+        "source_url": "https://www.databank.com/data-centers/los-angeles/",
+        "status": "exact",
+        "value": 34.0
+      },
+      {
+        "difference": 0,
+        "facility_sum": 1,
+        "field": "facility_count",
+        "origin": "headline",
+        "raw_label": "Total Data Centers",
+        "raw_value": "1",
+        "record_level": "market",
+        "rounding_tolerance": 0.0,
+        "source_url": "https://www.databank.com/data-centers/memphis/",
+        "status": "exact",
+        "value": 1
+      },
+      {
+        "difference": 0,
+        "facility_sum": 7090,
+        "field": "it_area_sqft",
+        "origin": "headline",
+        "raw_label": "IT Square Footage",
+        "raw_value": "7,090",
+        "record_level": "market",
+        "rounding_tolerance": 0.5,
+        "source_url": "https://www.databank.com/data-centers/memphis/",
+        "status": "exact",
+        "value": 7090
+      },
+      {
+        "difference": -0.05,
+        "facility_sum": 0.45,
+        "field": "critical_it_mw",
+        "origin": "headline",
+        "raw_label": "Critical IT Load",
+        "raw_value": "0.5MW",
+        "record_level": "market",
+        "rounding_tolerance": 0.05,
+        "source_url": "https://www.databank.com/data-centers/memphis/",
+        "status": "rounding",
+        "value": 0.5
+      },
+      {
+        "difference": 0,
+        "facility_sum": 1,
+        "field": "facility_count",
+        "origin": "headline",
+        "raw_label": "Total Data Centers",
+        "raw_value": "1",
+        "record_level": "market",
+        "rounding_tolerance": 0.0,
+        "source_url": "https://www.databank.com/data-centers/miami/",
+        "status": "exact",
+        "value": 1
+      },
+      {
+        "difference": 0,
+        "facility_sum": 11030,
+        "field": "it_area_sqft",
+        "origin": "headline",
+        "raw_label": "IT Square Footage",
+        "raw_value": "11,030",
+        "record_level": "market",
+        "rounding_tolerance": 0.5,
+        "source_url": "https://www.databank.com/data-centers/miami/",
+        "status": "exact",
+        "value": 11030
+      },
+      {
+        "difference": 0.0,
+        "facility_sum": 1.6,
+        "field": "critical_it_mw",
+        "origin": "headline",
+        "raw_label": "Critical IT Load",
+        "raw_value": "1.6MW",
+        "record_level": "market",
+        "rounding_tolerance": 0.05,
+        "source_url": "https://www.databank.com/data-centers/miami/",
+        "status": "exact",
+        "value": 1.6
+      },
+      {
+        "difference": 0,
+        "facility_sum": 4,
+        "field": "facility_count",
+        "origin": "headline",
+        "raw_label": "Total Data Centers",
+        "raw_value": "4",
+        "record_level": "market",
+        "rounding_tolerance": 0.0,
+        "source_url": "https://www.databank.com/data-centers/minneapolis/",
+        "status": "exact",
+        "value": 4
+      },
+      {
+        "difference": 0,
+        "facility_sum": 165501,
+        "field": "it_area_sqft",
+        "origin": "headline",
+        "raw_label": "IT Square Footage",
+        "raw_value": "165,501",
+        "record_level": "market",
+        "rounding_tolerance": 0.5,
+        "source_url": "https://www.databank.com/data-centers/minneapolis/",
+        "status": "exact",
+        "value": 165501
+      },
+      {
+        "difference": 0.029,
+        "facility_sum": 16.129,
+        "field": "critical_it_mw",
+        "origin": "headline",
+        "raw_label": "Critical IT Load",
+        "raw_value": "16.1MW",
+        "record_level": "market",
+        "rounding_tolerance": 0.05,
+        "source_url": "https://www.databank.com/data-centers/minneapolis/",
+        "status": "rounding",
+        "value": 16.1
+      },
+      {
+        "difference": 0,
+        "facility_sum": 2,
+        "field": "facility_count",
+        "origin": "headline",
+        "raw_label": "Total Data Centers",
+        "raw_value": "2",
+        "record_level": "market",
+        "rounding_tolerance": 0.0,
+        "source_url": "https://www.databank.com/data-centers/new-jersey/",
+        "status": "exact",
+        "value": 2
+      },
+      {
+        "difference": 0,
+        "facility_sum": 56950,
+        "field": "it_area_sqft",
+        "origin": "headline",
+        "raw_label": "IT Square Footage",
+        "raw_value": "56,950",
+        "record_level": "market",
+        "rounding_tolerance": 0.5,
+        "source_url": "https://www.databank.com/data-centers/new-jersey/",
+        "status": "exact",
+        "value": 56950
+      },
+      {
+        "difference": 0.0,
+        "facility_sum": 4.7,
+        "field": "critical_it_mw",
+        "origin": "headline",
+        "raw_label": "Critical IT Load",
+        "raw_value": "4.7MW",
+        "record_level": "market",
+        "rounding_tolerance": 0.05,
+        "source_url": "https://www.databank.com/data-centers/new-jersey/",
+        "status": "exact",
+        "value": 4.7
+      },
+      {
+        "difference": 0,
+        "facility_sum": 4,
+        "field": "facility_count",
+        "origin": "headline",
+        "raw_label": "Total Data Centers",
+        "raw_value": "4",
+        "record_level": "market",
+        "rounding_tolerance": 0.0,
+        "source_url": "https://www.databank.com/data-centers/new-york-city/",
+        "status": "exact",
+        "value": 4
+      },
+      {
+        "difference": 0,
+        "facility_sum": 199140,
+        "field": "it_area_sqft",
+        "origin": "headline",
+        "raw_label": "IT Square Footage",
+        "raw_value": "199,140",
+        "record_level": "market",
+        "rounding_tolerance": 0.5,
+        "source_url": "https://www.databank.com/data-centers/new-york-city/",
+        "status": "exact",
+        "value": 199140
+      },
+      {
+        "difference": 0.02,
+        "facility_sum": 31.42,
+        "field": "critical_it_mw",
+        "origin": "headline",
+        "raw_label": "Critical IT Load",
+        "raw_value": "31.4MW",
+        "record_level": "market",
+        "rounding_tolerance": 0.05,
+        "source_url": "https://www.databank.com/data-centers/new-york-city/",
+        "status": "rounding",
+        "value": 31.4
+      },
+      {
+        "difference": 0,
+        "facility_sum": 6,
+        "field": "facility_count",
+        "origin": "headline",
+        "raw_label": "Total Data Centers",
+        "raw_value": "6",
+        "record_level": "market",
+        "rounding_tolerance": 0.0,
+        "source_url": "https://www.databank.com/data-centers/northern-virginia/",
+        "status": "exact",
+        "value": 6
+      },
+      {
+        "difference": 0,
+        "facility_sum": 1009172,
+        "field": "it_area_sqft",
+        "origin": "headline",
+        "raw_label": "IT Square Footage",
+        "raw_value": "1,009,172",
+        "record_level": "market",
+        "rounding_tolerance": 0.5,
+        "source_url": "https://www.databank.com/data-centers/northern-virginia/",
+        "status": "exact",
+        "value": 1009172
+      },
+      {
+        "difference": 0.0,
+        "facility_sum": 264.9,
+        "field": "critical_it_mw",
+        "origin": "headline",
+        "raw_label": "Critical IT Load",
+        "raw_value": "264.9MW",
+        "record_level": "market",
+        "rounding_tolerance": 0.05,
+        "source_url": "https://www.databank.com/data-centers/northern-virginia/",
+        "status": "exact",
+        "value": 264.9
+      },
+      {
+        "difference": 0,
+        "facility_sum": 1,
+        "field": "facility_count",
+        "origin": "headline",
+        "raw_label": "Total Data Centers",
+        "raw_value": "1",
+        "record_level": "market",
+        "rounding_tolerance": 0.0,
+        "source_url": "https://www.databank.com/data-centers/philadelphia/",
+        "status": "exact",
+        "value": 1
+      },
+      {
+        "difference": 0,
+        "facility_sum": 7760,
+        "field": "it_area_sqft",
+        "origin": "headline",
+        "raw_label": "IT Square Footage",
+        "raw_value": "7,760",
+        "record_level": "market",
+        "rounding_tolerance": 0.5,
+        "source_url": "https://www.databank.com/data-centers/philadelphia/",
+        "status": "exact",
+        "value": 7760
+      },
+      {
+        "difference": 0.04,
+        "facility_sum": 0.34,
+        "field": "critical_it_mw",
+        "origin": "headline",
+        "raw_label": "Critical IT Load",
+        "raw_value": "0.3MW",
+        "record_level": "market",
+        "rounding_tolerance": 0.05,
+        "source_url": "https://www.databank.com/data-centers/philadelphia/",
+        "status": "rounding",
+        "value": 0.3
+      },
+      {
+        "difference": 0,
+        "facility_sum": 2,
+        "field": "facility_count",
+        "origin": "headline",
+        "raw_label": "Total Data Centers",
+        "raw_value": "2",
+        "record_level": "market",
+        "rounding_tolerance": 0.0,
+        "source_url": "https://www.databank.com/data-centers/pittsburgh/",
+        "status": "exact",
+        "value": 2
+      },
+      {
+        "difference": 0,
+        "facility_sum": 77860,
+        "field": "it_area_sqft",
+        "origin": "headline",
+        "raw_label": "IT Square Footage",
+        "raw_value": "77,860",
+        "record_level": "market",
+        "rounding_tolerance": 0.5,
+        "source_url": "https://www.databank.com/data-centers/pittsburgh/",
+        "status": "exact",
+        "value": 77860
+      },
+      {
+        "difference": 0.0,
+        "facility_sum": 6.9,
+        "field": "critical_it_mw",
+        "origin": "headline",
+        "raw_label": "Critical IT Load",
+        "raw_value": "6.9MW",
+        "record_level": "market",
+        "rounding_tolerance": 0.05,
+        "source_url": "https://www.databank.com/data-centers/pittsburgh/",
+        "status": "exact",
+        "value": 6.9
+      },
+      {
+        "difference": 0,
+        "facility_sum": 6,
+        "field": "facility_count",
+        "origin": "headline",
+        "raw_label": "Total Data Centers",
+        "raw_value": "6",
+        "record_level": "market",
+        "rounding_tolerance": 0.0,
+        "source_url": "https://www.databank.com/data-centers/salt-lake-city/",
+        "status": "exact",
+        "value": 6
+      },
+      {
+        "difference": 0,
+        "facility_sum": 268380,
+        "field": "it_area_sqft",
+        "origin": "headline",
+        "raw_label": "IT Square Footage",
+        "raw_value": "268,380",
+        "record_level": "market",
+        "rounding_tolerance": 0.5,
+        "source_url": "https://www.databank.com/data-centers/salt-lake-city/",
+        "status": "exact",
+        "value": 268380
+      },
+      {
+        "difference": 0.02,
+        "facility_sum": 46.42,
+        "field": "critical_it_mw",
+        "origin": "headline",
+        "raw_label": "Critical IT Load",
+        "raw_value": "46.4MW",
+        "record_level": "market",
+        "rounding_tolerance": 0.05,
+        "source_url": "https://www.databank.com/data-centers/salt-lake-city/",
+        "status": "rounding",
+        "value": 46.4
+      },
+      {
+        "difference": 0,
+        "facility_sum": 268380,
+        "field": "it_area_sqft",
+        "origin": "faq",
+        "raw_label": "Explicit total in FAQ",
+        "raw_value": "268,380",
+        "record_level": "market",
+        "rounding_tolerance": 0.5,
+        "source_url": "https://www.databank.com/data-centers/salt-lake-city/",
+        "status": "exact",
+        "value": 268380
+      },
+      {
+        "difference": 0,
+        "facility_sum": 1,
+        "field": "facility_count",
+        "origin": "headline",
+        "raw_label": "Total Data Centers",
+        "raw_value": "1",
+        "record_level": "market",
+        "rounding_tolerance": 0.0,
+        "source_url": "https://www.databank.com/data-centers/san-diego/",
+        "status": "exact",
+        "value": 1
+      },
+      {
+        "difference": 0,
+        "facility_sum": 55239,
+        "field": "it_area_sqft",
+        "origin": "headline",
+        "raw_label": "IT Square Footage",
+        "raw_value": "55,239",
+        "record_level": "market",
+        "rounding_tolerance": 0.5,
+        "source_url": "https://www.databank.com/data-centers/san-diego/",
+        "status": "exact",
+        "value": 55239
+      },
+      {
+        "difference": 0.0,
+        "facility_sum": 7.2,
+        "field": "critical_it_mw",
+        "origin": "headline",
+        "raw_label": "Critical IT Load",
+        "raw_value": "7.2MW",
+        "record_level": "market",
+        "rounding_tolerance": 0.05,
+        "source_url": "https://www.databank.com/data-centers/san-diego/",
+        "status": "exact",
+        "value": 7.2
+      },
+      {
+        "difference": 99,
+        "facility_sum": 55239,
+        "field": "it_area_sqft",
+        "origin": "faq",
+        "raw_label": "Explicit total in FAQ",
+        "raw_value": "55,140",
+        "record_level": "market",
+        "rounding_tolerance": 0.5,
+        "source_url": "https://www.databank.com/data-centers/san-diego/",
+        "status": "conflict",
+        "value": 55140
+      },
+      {
+        "difference": 0,
+        "facility_sum": 2,
+        "field": "facility_count",
+        "origin": "headline",
+        "raw_label": "Total Data Centers",
+        "raw_value": "2",
+        "record_level": "market",
+        "rounding_tolerance": 0.0,
+        "source_url": "https://www.databank.com/data-centers/seattle/",
+        "status": "exact",
+        "value": 2
+      },
+      {
+        "difference": 0,
+        "facility_sum": 32290,
+        "field": "it_area_sqft",
+        "origin": "headline",
+        "raw_label": "IT Square Footage",
+        "raw_value": "32,290",
+        "record_level": "market",
+        "rounding_tolerance": 0.5,
+        "source_url": "https://www.databank.com/data-centers/seattle/",
+        "status": "exact",
+        "value": 32290
+      },
+      {
+        "difference": 0.01,
+        "facility_sum": 3.21,
+        "field": "critical_it_mw",
+        "origin": "headline",
+        "raw_label": "Critical IT Load",
+        "raw_value": "3.2MW",
+        "record_level": "market",
+        "rounding_tolerance": 0.05,
+        "source_url": "https://www.databank.com/data-centers/seattle/",
+        "status": "rounding",
+        "value": 3.2
+      },
+      {
+        "difference": 3050,
+        "facility_sum": 32290,
+        "field": "it_area_sqft",
+        "origin": "faq",
+        "raw_label": "Explicit total in FAQ",
+        "raw_value": "29,240",
+        "record_level": "market",
+        "rounding_tolerance": 0.5,
+        "source_url": "https://www.databank.com/data-centers/seattle/",
+        "status": "conflict",
+        "value": 29240
+      },
+      {
+        "difference": 0,
+        "facility_sum": 1,
+        "field": "facility_count",
+        "origin": "headline",
+        "raw_label": "Total Data Centers",
+        "raw_value": "1",
+        "record_level": "market",
+        "rounding_tolerance": 0.0,
+        "source_url": "https://www.databank.com/data-centers/silicon-valley/",
+        "status": "exact",
+        "value": 1
+      },
+      {
+        "difference": 0,
+        "facility_sum": 16680,
+        "field": "it_area_sqft",
+        "origin": "headline",
+        "raw_label": "IT Square Footage",
+        "raw_value": "16,680",
+        "record_level": "market",
+        "rounding_tolerance": 0.5,
+        "source_url": "https://www.databank.com/data-centers/silicon-valley/",
+        "status": "exact",
+        "value": 16680
+      },
+      {
+        "difference": 0.0,
+        "facility_sum": 3.0,
+        "field": "critical_it_mw",
+        "origin": "headline",
+        "raw_label": "Critical IT Load",
+        "raw_value": "3MW",
+        "record_level": "market",
+        "rounding_tolerance": 0.5,
+        "source_url": "https://www.databank.com/data-centers/silicon-valley/",
+        "status": "exact",
+        "value": 3.0
+      },
+      {
+        "difference": 2910,
+        "facility_sum": 16680,
+        "field": "it_area_sqft",
+        "origin": "faq",
+        "raw_label": "Explicit total in FAQ",
+        "raw_value": "13,770",
+        "record_level": "market",
+        "rounding_tolerance": 0.5,
+        "source_url": "https://www.databank.com/data-centers/silicon-valley/",
+        "status": "conflict",
+        "value": 13770
+      },
+      {
+        "difference": 0,
+        "facility_sum": 1,
+        "field": "facility_count",
+        "origin": "headline",
+        "raw_label": "Total Data Centers",
+        "raw_value": "1",
+        "record_level": "market",
+        "rounding_tolerance": 0.0,
+        "source_url": "https://www.databank.com/data-centers/waco/",
+        "status": "exact",
+        "value": 1
+      },
+      {
+        "difference": 0,
+        "facility_sum": 14210,
+        "field": "it_area_sqft",
+        "origin": "headline",
+        "raw_label": "IT Square Footage",
+        "raw_value": "14,210",
+        "record_level": "market",
+        "rounding_tolerance": 0.5,
+        "source_url": "https://www.databank.com/data-centers/waco/",
+        "status": "exact",
+        "value": 14210
+      },
+      {
+        "difference": 0.0,
+        "facility_sum": 0.8,
+        "field": "critical_it_mw",
+        "origin": "headline",
+        "raw_label": "Critical IT Load",
+        "raw_value": "0.8MW",
+        "record_level": "market",
+        "rounding_tolerance": 0.05,
+        "source_url": "https://www.databank.com/data-centers/waco/",
+        "status": "exact",
+        "value": 0.8
+      }
+    ],
+    "rejections": [],
+    "scope": [
+      "https://www.databank.com/data-centers/atlanta/",
+      "https://www.databank.com/data-centers/austin/",
+      "https://www.databank.com/data-centers/boston/",
+      "https://www.databank.com/data-centers/chicago/",
+      "https://www.databank.com/data-centers/cleveland/",
+      "https://www.databank.com/data-centers/dallas/",
+      "https://www.databank.com/data-centers/denver/",
+      "https://www.databank.com/data-centers/houston/",
+      "https://www.databank.com/data-centers/indianapolis/",
+      "https://www.databank.com/data-centers/irvine/",
+      "https://www.databank.com/data-centers/kansas-city/",
+      "https://www.databank.com/data-centers/las-vegas/",
+      "https://www.databank.com/data-centers/london/",
+      "https://www.databank.com/data-centers/los-angeles/",
+      "https://www.databank.com/data-centers/memphis/",
+      "https://www.databank.com/data-centers/miami/",
+      "https://www.databank.com/data-centers/minneapolis/",
+      "https://www.databank.com/data-centers/new-jersey/",
+      "https://www.databank.com/data-centers/new-york-city/",
+      "https://www.databank.com/data-centers/northern-virginia/",
+      "https://www.databank.com/data-centers/philadelphia/",
+      "https://www.databank.com/data-centers/pittsburgh/",
+      "https://www.databank.com/data-centers/salt-lake-city/",
+      "https://www.databank.com/data-centers/san-diego/",
+      "https://www.databank.com/data-centers/seattle/",
+      "https://www.databank.com/data-centers/silicon-valley/",
+      "https://www.databank.com/data-centers/waco/"
+    ],
+    "warning_counts": {
+      "aggregate_conflicts": 4,
+      "card_detail_conflicts": 0,
+      "parse_issues": 1
+    }
+  },
+  "run_id": "20260918T082206-5263eb57",
+  "source": {
+    "all_markets": true,
+    "data_kind": "live",
+    "directory_url": "https://www.databank.com/data-centers/",
+    "name": "DataBank",
+    "page_count": 105,
+    "parser_version": "1",
+    "retrieval_finished_at": "2026-09-18T08:19:10.679689+00:00",
+    "retrieval_started_at": "2026-09-18T08:17:20.174688+00:00",
+    "scope": [
+      "https://www.databank.com/data-centers/atlanta/",
+      "https://www.databank.com/data-centers/austin/",
+      "https://www.databank.com/data-centers/boston/",
+      "https://www.databank.com/data-centers/chicago/",
+      "https://www.databank.com/data-centers/cleveland/",
+      "https://www.databank.com/data-centers/dallas/",
+      "https://www.databank.com/data-centers/denver/",
+      "https://www.databank.com/data-centers/houston/",
+      "https://www.databank.com/data-centers/indianapolis/",
+      "https://www.databank.com/data-centers/irvine/",
+      "https://www.databank.com/data-centers/kansas-city/",
+      "https://www.databank.com/data-centers/las-vegas/",
+      "https://www.databank.com/data-centers/london/",
+      "https://www.databank.com/data-centers/los-angeles/",
+      "https://www.databank.com/data-centers/memphis/",
+      "https://www.databank.com/data-centers/miami/",
+      "https://www.databank.com/data-centers/minneapolis/",
+      "https://www.databank.com/data-centers/new-jersey/",
+      "https://www.databank.com/data-centers/new-york-city/",
+      "https://www.databank.com/data-centers/northern-virginia/",
+      "https://www.databank.com/data-centers/philadelphia/",
+      "https://www.databank.com/data-centers/pittsburgh/",
+      "https://www.databank.com/data-centers/salt-lake-city/",
+      "https://www.databank.com/data-centers/san-diego/",
+      "https://www.databank.com/data-centers/seattle/",
+      "https://www.databank.com/data-centers/silicon-valley/",
+      "https://www.databank.com/data-centers/waco/"
+    ],
+    "source_freshness": "Unknown; retrieval timestamps are not publication dates.",
+    "terms_url": "https://www.databank.com/terms-of-use/"
+  },
+  "summary": {
+    "correlation": {
+      "n": 76,
+      "pearson": 0.956828182921706,
+      "reason": null,
+      "spearman": 0.9533377863838423
+    },
+    "critical_it_mw": 1023.179,
+    "density_w_per_sqft": {
+      "median": 118.338,
+      "p10": 51.657,
+      "p90": 299.813
+    },
+    "facility_count": 76,
+    "it_area_sqft": 4976008,
+    "market_count": 27,
+    "top_three_market_capacity_share": 0.7351743927504376
+  }
+}

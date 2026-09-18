@@ -47,6 +47,9 @@ def analyze(
                 }
             )
         markets.sort(key=lambda m: (-m["critical_it_mw"], m["market"]))
+        summary["top_three_market_capacity_share"] = sum(
+            m["capacity_share"] for m in markets[:3]
+        )
         if len(records) >= 5:
             x, y = frame["it_area_sqft"], frame["critical_it_mw"]
             if x.nunique() > 1 and y.nunique() > 1:

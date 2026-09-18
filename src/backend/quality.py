@@ -27,8 +27,11 @@ def assess_quality(
     previous_count: int | None = None,
 ) -> dict:
     issues = []
-    urls = Counter(c["url"] for c in candidates if c["url"])
-    codes = Counter(c["code"] for c in candidates if c["code"])
+    facilities = [
+        c for c in candidates if c.get("record_level", "facility") == "facility"
+    ]
+    urls = Counter(c["url"] for c in facilities if c["url"])
+    codes = Counter(c["code"] for c in facilities if c["code"])
     duplicates = {
         "urls": {key: n for key, n in urls.items() if n > 1},
         "codes": {key: n for key, n in codes.items() if n > 1},
@@ -130,6 +133,16 @@ def assess_quality(
             for field in ("onsite_carriers", "address_raw", "campus_name")
         },
         "missingness_denominator": len(records),
+        "missingness_notes": {
+            "campus_name": "Null means no explicit campus grouping in the market listing; it does not invalidate a facility."
+        },
+        "warning_counts": {
+            "card_detail_conflicts": len(conflicts),
+            "aggregate_conflicts": sum(
+                r["status"] == "conflict" for r in reconciliations
+            ),
+            "parse_issues": len(issues),
+        },
         "duplicates": duplicates,
         "card_detail_conflicts": conflicts,
         "reconciliation": reconciliations,

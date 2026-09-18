@@ -18,6 +18,8 @@ def test_discovery_variants_and_label_matching():
     assert candidates[0].url == MARKET + "one/"
     assert candidates[0].metrics["critical_it_mw"] == "1 MW"
     assert candidates[1].record_level == "facility"
+    assert candidates[1].campus_name == "Synthetic Campus"
+    assert candidates[2].campus_name is None
     assert candidates[3].record_level == "campus"
     assert len([o for o in claims if o["record_level"] == "market"]) == 1
 

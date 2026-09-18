@@ -103,6 +103,12 @@ def parse_market(content: bytes, url: str) -> tuple[list[Candidate], list[dict]]
         except ValueError:
             detail_url = ""
         address = card.select_one(".c-data-center-card__location")
+        section = card.find_previous(class_="c-data-center-card__section-title")
+        campus_name = (
+            clean(section.get_text(" ", strip=True))
+            if section and str(section.get("id", "")).startswith("data-campus-")
+            else None
+        )
         metrics = metric_elements(
             card.select(".c-data-center-card__data > div"), url, level, "card"
         )
@@ -119,6 +125,7 @@ def parse_market(content: bytes, url: str) -> tuple[list[Candidate], list[dict]]
                 code=code.group(1) if code else None,
                 address=clean(address.get_text(" ", strip=True)) if address else None,
                 metrics=metric_values(metrics),
+                campus_name=campus_name,
                 record_level=level,
             )
         )
