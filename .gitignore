@@ -20,8 +20,12 @@ dist/
 .DS_Store
 
 # Local data runs
-/data/bronze/*
-!/data/bronze/.gitkeep
+/data/raw/*
+!/data/raw/.gitkeep
+!/data/raw/example/
+!/data/raw/example/**
+!/data/raw/20260918T081720-ab352538/
+!/data/raw/20260918T081720-ab352538/**
 /data/silver/*
 !/data/silver/.gitkeep
 /data/gold/*
