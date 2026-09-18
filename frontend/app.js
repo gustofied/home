@@ -54,7 +54,7 @@ function conflictText(item) {
 
 function renderOverview() {
   const s = report.summary, q = report.quality, c = q.carrier_coverage;
-  $("collection").textContent = `${report.source.data_kind === "synthetic" ? "Synthetic example" : "Published inventory"} / collected ${date(report.as_of)}`;
+  $("collection").textContent = `${report.source.data_kind === "synthetic" ? "Synthetic example" : "Source: DataBank"} — collected ${date(report.as_of)}`;
   $("run-id").textContent = `Run ${report.run_id}`;
   $("totals").replaceChildren(metric("Facilities", fmt(s.facility_count)), metric("Markets", fmt(s.market_count)), metric("Advertised IT capacity", `${fmt(s.critical_it_mw, 1)} MW`), metric("IT floor area", `${fmt(s.it_area_sqft)} ft²`));
   $("quality-finding").textContent = `${c.missing_count} of ${c.facility_count} facilities (${pct(c.missing_facility_share)}) have no known carrier count. They represent ${pct(c.missing_capacity_share)} of advertised capacity: ${fmt(c.missing_capacity_mw, 3)} of ${fmt(c.total_capacity_mw, 3)} MW.`;
@@ -133,7 +133,7 @@ function renderScatter(rows) {
   svg.append(svgNode("text", { x: left, y: 16 }, "Advertised IT load (MW)"), svgNode("text", { x: width / 2, y: height - 12, "text-anchor": "middle" }, `IT floor area (ft²)${log ? " / logarithmic scales" : ""}`));
   rows.forEach((f) => {
     const label = `${f.facility_code}: ${fmt(f.it_area_sqft)} ft², ${fmt(f.critical_it_mw, 3)} MW, ${f.onsite_carriers == null ? "carriers unknown" : `${f.onsite_carriers} carriers`}`;
-    const point = svgNode("circle", { cx: left + x.scale(f.it_area_sqft), cy: height - bottom - y.scale(f.critical_it_mw), r: 5, fill: f.onsite_carriers == null ? "white" : "#313131", class: "point", tabindex: 0, role: "button", "aria-label": label });
+    const point = svgNode("circle", { cx: left + x.scale(f.it_area_sqft), cy: height - bottom - y.scale(f.critical_it_mw), r: 5, fill: f.onsite_carriers == null ? "var(--paper)" : "var(--accent)", class: "point", tabindex: 0, role: "button", "aria-label": label });
     point.append(svgNode("title", {}, label));
     point.addEventListener("click", () => showEvidence(f, point));
     point.addEventListener("keydown", (event) => { if (["Enter", " "].includes(event.key)) { event.preventDefault(); showEvidence(f, point); } });
@@ -226,4 +226,17 @@ async function load() {
   } catch (error) { $("status").textContent = error.message; $("retry").hidden = false; }
 }
 $("retry").addEventListener("click", load);
+const navLinks = [...document.querySelectorAll('nav[aria-label="Sections"] a')];
+function selectSection(id) {
+  navLinks.forEach((link) => {
+    if (link.hash === `#${id}`) link.setAttribute("aria-current", "location");
+    else link.removeAttribute("aria-current");
+  });
+}
+navLinks.forEach((link) => link.addEventListener("click", () => selectSection(link.hash.slice(1))));
+const sectionObserver = new IntersectionObserver((entries) => {
+  for (const entry of entries) if (entry.isIntersecting) selectSection(entry.target.classList.contains("intro") ? "quality" : entry.target.id);
+}, { rootMargin: "-15% 0px -65% 0px" });
+document.querySelectorAll("main > #study > section").forEach((section) => sectionObserver.observe(section));
+sectionObserver.observe(document.querySelector(".intro"));
 await load();

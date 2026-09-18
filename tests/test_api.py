@@ -20,7 +20,7 @@ def test_frontend() -> None:
     response = client.get("/")
 
     assert response.status_code == 200
-    assert "DataBank Explorer" in response.text
+    assert "Capacity Explorer" in response.text
 
 
 def test_missing_results_and_published_contracts(tmp_path, monkeypatch):
