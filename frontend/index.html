@@ -46,7 +46,7 @@
         <div class="chart-toolbar"><p id="result-count" role="status" hidden></p><label class="check"><input id="log-scale" type="checkbox" checked>Log axes</label></div>
         <figure class="scatter"><div id="scatter-chart"></div><figcaption>Each point is one facility; identical specifications overlap. Select a point or facility code for source details. Filled = carrier count known; hollow = unknown. Filters affect the chart and table; the totals above cover all facilities.</figcaption></figure>
         <p id="empty" hidden>No facilities match these filters. Try a different search or reset.</p>
-        <div class="table-scroll" tabindex="0" aria-label="Facility comparison table">
+        <div id="facility-table-scroll" class="table-scroll facility-scroll" tabindex="0" aria-label="Facility comparison table, scroll for more facilities">
           <table id="facility-table"><caption class="sr-only">Filtered DataBank facilities. Select a column heading to sort.</caption><thead><tr>
             <th aria-sort="ascending"><button type="button" data-sort="facility_code">Facility ↕</button></th>
             <th><button type="button" data-sort="market">Market ↕</button></th>
@@ -56,7 +56,7 @@
             <th class="numeric"><button type="button" data-sort="onsite_carriers">Carriers ↕</button></th>
           </tr></thead><tbody id="facility-rows"></tbody></table>
         </div>
-        <p class="small"><a id="download" download="databank-facilities.csv">Download the displayed rows as CSV</a></p>
+        <p class="small"><a id="download" download="databank-facilities.csv">Download matching facilities as CSV</a></p>
         <aside id="evidence" class="evidence" tabindex="-1" hidden aria-labelledby="evidence-title">
           <div class="evidence-heading"><div><p class="eyebrow">Source details</p><h3 id="evidence-title"></h3></div><button id="close-evidence" type="button">Close</button></div>
           <p id="evidence-address"></p><dl id="evidence-values" class="evidence-values"></dl><p id="evidence-links"></p><p id="evidence-time" class="small muted"></p>

@@ -269,6 +269,7 @@ function filteredRows() {
 }
 function renderFacilities() {
   const rows = filteredRows();
+  $("facility-table-scroll").scrollTop = 0;
   $("result-count").textContent = `${rows.length} of ${facilities.length} facilities`;
   $("result-count").hidden = rows.length === facilities.length;
   $("empty").hidden = rows.length > 0;
@@ -318,6 +319,14 @@ function showEvidence(f, trigger) {
   $("evidence").hidden = false; $("evidence").focus({ preventScroll: true }); $("evidence").scrollIntoView({ block: "start" });
 }
 function resetFilters() { $("filters").reset(); }
+function sizeFacilityTable() {
+  const table = $("facility-table");
+  const rows = $("facility-rows").children;
+  const lastVisible = rows[Math.min(15, rows.length) - 1] ?? table.tHead;
+  const height = Math.ceil(lastVisible.getBoundingClientRect().bottom - table.getBoundingClientRect().top);
+  if (height > 0) $("facility-table-scroll").style.maxHeight = `${height}px`;
+}
+new ResizeObserver(sizeFacilityTable).observe($("facility-table"));
 $("filters").addEventListener("submit", (event) => event.preventDefault());
 $("filters").addEventListener("input", () => renderFacilities());
 $("reset-filters").addEventListener("click", () => { resetFilters(); renderFacilities(); });
