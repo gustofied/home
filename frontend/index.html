@@ -12,7 +12,7 @@
   <a class="skip" href="#content">Skip to content</a>
   <header class="masthead">
     <div class="identity"><a class="brand" href="/" aria-label="HOME">HOME</a><span class="brand-description">A home for data center facility insights</span></div>
-    <nav aria-label="Sections"><a href="#quality" aria-current="location"><span>01</span> Quality</a><a href="#portfolio"><span>02</span> Portfolio</a><a href="#comparison"><span>03</span> Facilities</a><a href="#about"><span>04</span> About</a></nav>
+    <nav aria-label="Sections"><a href="#portfolio" aria-current="location"><span>01</span> Portfolio</a><a href="#comparison"><span>02</span> Facilities</a><a href="#analysis"><span>03</span> Analysis</a><a href="#about"><span>04</span> About</a></nav>
   </header>
   <main id="content">
     <header class="intro">
@@ -26,15 +26,8 @@
     <noscript>This explorer needs JavaScript. See <a href="/api/overview">the report API</a> for the published data.</noscript>
     <div id="study" hidden>
       <dl id="totals" class="totals"></dl>
-      <section id="quality" class="section">
-        <div class="section-label"><span>01</span><h2>Coverage and quality</h2></div>
-        <div class="quality-layout">
-          <div><h3>Missing information is concentrated, too.</h3><p id="quality-finding"></p><p class="muted">Carrier counts show how many network providers are listed at each site. They do not measure connection speed or latency.</p><button id="missing-filter" class="text-button" type="button">View facilities with unknown carriers →</button></div>
-          <div><div id="missing-chart" class="proportions"></div><p id="quality-status" class="small"></p><details><summary id="issue-summary">Source discrepancies</summary><ul id="issues" class="issue-list"></ul></details></div>
-        </div>
-      </section>
       <section id="portfolio" class="section">
-        <div class="section-label"><span>02</span><h2>Portfolio overview</h2></div>
+        <div class="section-label"><span>01</span><h2>Portfolio overview</h2></div>
         <h3 id="concentration-title"></h3><p id="concentration-finding"></p>
         <div class="market-head"><span>Market</span><span>Advertised IT capacity</span><span>Facilities</span></div>
         <div id="market-chart" aria-label="Advertised capacity by market"></div>
@@ -42,7 +35,7 @@
         <p class="small muted">All percentages refer to the DataBank facilities shown here.</p>
       </section>
       <section id="comparison" class="section">
-        <div class="section-label"><span>03</span><h2>Facility comparison</h2></div>
+        <div class="section-label"><span>02</span><h2>Facility comparison</h2></div>
         <h3>A typical facility is not the portfolio average.</h3><p id="density-finding"></p>
         <form id="filters" class="filters" role="search">
           <label>Market<select id="market"><option value="">All markets</option></select></label>
@@ -50,7 +43,7 @@
           <label class="check"><input id="missing" type="checkbox">Unknown carriers only</label>
           <button id="reset-filters" type="button">Reset</button>
         </form>
-        <div class="chart-toolbar"><p id="result-count" role="status"></p><label class="check"><input id="log-scale" type="checkbox" checked>Log axes</label></div>
+        <div class="chart-toolbar"><p id="result-count" role="status" hidden></p><label class="check"><input id="log-scale" type="checkbox" checked>Log axes</label></div>
         <figure class="scatter"><div id="scatter-chart"></div><figcaption>Each point is one facility; identical specifications overlap. Select a point or facility code for source details. Filled = carrier count known; hollow = unknown. Filters affect the chart and table; the totals above cover all facilities.</figcaption></figure>
         <p id="empty" hidden>No facilities match these filters. Try a different search or reset.</p>
         <div class="table-scroll" tabindex="0" aria-label="Facility comparison table">
@@ -72,11 +65,39 @@
           <details><summary>Saved page details</summary><div id="evidence-provenance" class="provenance"></div></details>
         </aside>
       </section>
+      <section id="analysis" class="section">
+        <div class="section-label"><span>03</span><h2>Analysis</h2></div>
+        <h3>Floor space alone can give you the wrong impression of a facility’s capacity.</h3>
+        <p id="size-finding"></p>
+        <figure class="size-chart"><div id="size-chart"></div><figcaption id="size-caption"></figcaption></figure>
+        <details id="size-method"><summary>How we compared facilities</summary>
+          <p class="small">We sort facilities by IT floor area and split them into four groups of similar size, breaking any ties by facility code. Each bar shows the group’s median watts per square foot, so one extreme facility cannot dominate the comparison.</p>
+          <p id="size-check-description" class="small">We also check whether the relationship holds without the two largest markets, and without four Dallas facilities with identical area and power figures. Positive rank correlation means larger sites tend to have higher density. These comparisons do not establish why.</p>
+          <div class="table-scroll"><table><caption class="sr-only">Floor area and power density rank correlations</caption><thead><tr><th>Facilities included</th><th class="numeric">Count</th><th class="numeric">Rank correlation</th></tr></thead><tbody id="size-checks"></tbody></table></div>
+        </details>
+        <div id="facility-case-study" class="analysis-block" hidden>
+          <h3>Two Dallas facilities make the difference clear.</h3>
+          <p id="case-finding"></p>
+          <div id="facility-examples" class="case-grid"></div>
+          <p class="small muted">The descriptions suggest that facility role and power design may help explain the difference. Both pages list HPC compatibility. These examples give us a hypothesis to investigate across more facilities.</p>
+        </div>
+        <div id="carrier-question" class="analysis-block" hidden>
+          <h3>Do higher-power facilities list fewer network providers?</h3>
+          <p id="carrier-finding"></p>
+          <p class="small muted">Rank correlation compares how the two measures order facilities. A value near zero indicates little overall agreement between those rankings.</p>
+        </div>
+      </section>
       <section id="about" class="section">
         <div class="section-label"><span>04</span><h2>About the data</h2></div>
         <p>Figures come from DataBank’s facility pages. We compare them with its market listings and flag disagreements. Missing information is shown as “Unknown.”</p>
         <p>These are advertised specifications. Some facilities may still be planned or under development, so the totals don’t tell us how much capacity is operating or available to rent.</p>
         <p>The data was collected on the date shown. DataBank’s published figures may be older.</p>
+        <details id="quality"><summary>Data quality</summary>
+          <div class="quality-layout">
+            <div><h3>Missing information is concentrated, too.</h3><p id="quality-finding"></p><p id="quality-size" hidden></p><p class="muted">Carrier counts show how many network providers are listed at each site. They do not measure connection speed or latency.</p><button id="missing-filter" class="text-button" type="button">View facilities with unknown carriers →</button></div>
+            <div><div id="missing-chart" class="proportions"></div><details><summary id="issue-summary">Source discrepancies</summary><ul id="issues" class="issue-list"></ul></details><details><summary>Collection details</summary><p id="quality-status" class="small"></p></details></div>
+          </div>
+        </details>
         <details><summary>Calculations</summary><ul class="issue-list">
           <li>Power density = advertised IT capacity (MW) × 1,000,000 ÷ IT floor area (ft²).</li>
           <li>Median density is the middle facility value, averaging the two middle values when needed. Portfolio density divides total capacity by total floor area.</li>
@@ -85,7 +106,7 @@
       </section>
     </div>
   </main>
-  <footer><span>HOME</span><span>Source: DataBank</span><a href="/docs">API documentation</a><span id="run-id"></span></footer>
+  <footer><span>HOME</span><a href="/docs">API documentation</a><span id="run-id"></span></footer>
   <script type="module" src="/app.js"></script>
 </body>
 </html>

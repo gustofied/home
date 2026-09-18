@@ -5,6 +5,68 @@ import pandas as pd
 from .models import FacilityRecord, OverviewResponse
 
 
+def rank_correlation(frame: pd.DataFrame, x: str, y: str) -> float | None:
+    pairs = frame[[x, y]].dropna()
+    if len(pairs) < 5 or pairs[x].nunique() < 2 or pairs[y].nunique() < 2:
+        return None
+    return float(pairs[x].rank().corr(pairs[y].rank()))
+
+
+def size_density_analysis(frame: pd.DataFrame) -> dict | None:
+    if len(frame) < 4:
+        return None
+    ordered = frame.sort_values(["it_area_sqft", "facility_code"])
+    groups = []
+    labels = ["Smallest quarter", "Second quarter", "Third quarter", "Largest quarter"]
+    for index, label in enumerate(labels):
+        group = ordered.iloc[index * len(frame) // 4 : (index + 1) * len(frame) // 4]
+        groups.append(
+            {
+                "label": label,
+                "facility_count": len(group),
+                "area_min_sqft": int(group.it_area_sqft.min()),
+                "area_max_sqft": int(group.it_area_sqft.max()),
+                "median_density_w_per_sqft": float(
+                    group.capacity_density_w_per_sqft.median()
+                ),
+                "missing_carriers": int(group.onsite_carriers.isna().sum()),
+            }
+        )
+    samples = [
+        ("All facilities", frame),
+        (
+            "Without Dallas and Northern Virginia",
+            frame[~frame.market.isin(["dallas", "northern-virginia"])],
+        ),
+        (
+            "Without DFW9–DFW12",
+            frame[~frame.facility_code.isin(["DFW9", "DFW10", "DFW11", "DFW12"])],
+        ),
+    ]
+    known = frame.dropna(subset=["onsite_carriers"])
+    return {
+        "groups": groups,
+        "largest_to_smallest_median_ratio": groups[-1]["median_density_w_per_sqft"]
+        / groups[0]["median_density_w_per_sqft"],
+        "checks": [
+            {
+                "label": label,
+                "facility_count": len(sample),
+                "area_density_spearman": rank_correlation(
+                    sample, "it_area_sqft", "capacity_density_w_per_sqft"
+                ),
+            }
+            for label, sample in samples
+            if label == "All facilities" or len(sample) < len(frame)
+        ],
+        "power_carriers": {
+            "facility_count": len(known),
+            "missing_count": len(frame) - len(known),
+            "spearman": rank_correlation(known, "critical_it_mw", "onsite_carriers"),
+        },
+    }
+
+
 def analyze(
     records: list[FacilityRecord],
     quality: dict,
@@ -85,6 +147,7 @@ def analyze(
         quality=quality,
         breakdowns={
             "markets": markets,
+            "size_density": size_density_analysis(frame),
             "area_power_scatter": [
                 {
                     "facility_code": r.facility_code,
@@ -114,6 +177,7 @@ def analyze(
             "density_formula": "critical_it_mw * 1000000 / it_area_sqft",
             "density_meaning": "Advertised capacity per IT floor area, not measured consumption, utilization, or energy efficiency.",
             "density_comparison": "The median gives every accepted facility equal weight. Portfolio density divides total MW by total IT floor area on the same rows; it is an area-weighted mean of facility densities.",
+            "size_density": "Sort facilities by IT floor area, breaking ties by facility code, and split into four groups with counts as equal as possible. Compare each group's median W/ft². Spearman correlations use average ranks, exclude missing pairs, and are withheld for fewer than five pairs or constant inputs. Excluding Dallas and Northern Virginia, and separately DFW9–DFW12, provides exploratory sensitivity checks; these are not causal estimates.",
             "carrier_coverage": "Missing carrier counts are measured both as a share of accepted facilities and as a share of their total advertised MW. Missing counts are not zero; carrier count does not establish latency or connectivity quality.",
             "correlation": "Pearson on values; Spearman as Pearson on average ranks. Descriptive associations only; withheld for n < 5 or constant inputs.",
             "outliers": "Tukey 1.5 IQR fences on capacity density for n >= 5; flagged records remain included.",

@@ -13,9 +13,28 @@ const units = { critical_it_mw: " MW", it_area_sqft: " ft²", onsite_carriers: "
 const origins = { card: "Market listing", detail_main: "Facility headline", detail_specs: "Facility specification" };
 let report, facilities = [], sortKey = "facility_code", ascending = true, showAllMarkets = false, csvUrl, lastTrigger;
 
-// This manually reviewed prose note applies only to the captured page we checked.
-function reviewedDFW12() {
-  return (report.breakdowns.facility_evidence.DFW12 ?? []).some((claim) => claim.origin === "detail_main" && claim.sha256 === "e197c84d63cc2d642e1cc63edf53f7eac9e576ce6780ec5f1d2fce82f8a0c29f");
+// These reading notes apply only to the exact saved pages reviewed for this study.
+const sourceNotes = {
+  DFW1: {
+    sha256: "1daf264c8bc9338dcd77f5a962e1b10855ed4416689bc0924afcef871c385d13",
+    title: "Connectivity in downtown Dallas",
+    text: "The description emphasises its role as a carrier hotel, with connections to another major carrier hotel in Dallas.",
+  },
+  DFW8: {
+    sha256: "e32e7a90ee090dcfc173396d21f1db90550a0d112b1df6706f1422522692c43e",
+    title: "High-power cooling in Plano",
+    text: "The page promotes high-power air and liquid cooling and HPC infrastructure.",
+    caveat: "The page also says “Coming Soon”. Its main figures list 40 MW, while a highlights block lists 40.5 MW. We use 40 MW here.",
+  },
+  DFW12: {
+    sha256: "e197c84d63cc2d642e1cc63edf53f7eac9e576ce6780ec5f1d2fce82f8a0c29f",
+    text: "The saved description uses future tense. It does not confirm whether the facility is open or has capacity available to rent.",
+  },
+};
+function reviewedNote(code) {
+  const note = sourceNotes[code];
+  const claims = report.breakdowns.facility_evidence[code] ?? [];
+  return note && claims.some((claim) => claim.origin === "detail_main" && claim.sha256 === note.sha256) ? note : null;
 }
 
 function node(tag, text, className) {
@@ -78,6 +97,7 @@ function renderOverview() {
   $("density-finding").textContent = `Median facility density is ${fmt(s.density_w_per_sqft.median)} W/ft². Total power divided by total IT floor area is ${fmt(s.portfolio_density_w_per_sqft)} W/ft², giving sites with more floor area more weight. Neither measures utilisation, energy efficiency or GPU performance.`;
   $("market").replaceChildren(new Option("All markets", ""), ...[...new Set(facilities.map((f) => f.market))].sort().map((m) => new Option(marketName(m), m)));
   renderMarkets();
+  renderAnalysis();
 }
 
 function renderMarkets() {
@@ -146,6 +166,98 @@ function renderScatter(rows) {
   $("scatter-chart").replaceChildren(svg);
 }
 
+const narrowChart = matchMedia("(max-width: 720px)");
+function renderSizeChart(groups) {
+  const compact = narrowChart.matches;
+  const width = compact ? 400 : 760, height = compact ? 370 : 300;
+  const left = compact ? 16 : 208, right = compact ? 60 : 92;
+  const top = compact ? 54 : 36, step = compact ? 80 : 56, bottom = 36;
+  const max = Math.ceil(Math.max(...groups.map((g) => g.median_density_w_per_sqft)) / 50) * 50;
+  const scale = (value) => value / max * (width - left - right);
+  const svg = svgNode("svg", { viewBox: `0 0 ${width} ${height}`, role: "img", "aria-label": groups.map((g) => `${g.label}: median ${fmt(g.median_density_w_per_sqft)} watts per square foot, ${g.facility_count} facilities`).join(". ") });
+  svg.append(svgNode("text", { x: left, y: 16 }, "Median advertised W/ft²"));
+  for (let i = 0; i <= 5; i++) {
+    const value = max * i / 5, x = left + scale(value);
+    if (!compact) svg.append(svgNode("line", { x1: x, x2: x, y1: top - 8, y2: height - bottom, class: "grid" }));
+    svg.append(svgNode("text", { x, y: height - 12, "text-anchor": "middle" }, fmt(value)));
+  }
+  groups.forEach((group, index) => {
+    const y = top + index * step;
+    svg.append(
+      svgNode("text", { x: compact ? left : 0, y: compact ? y - 12 : y + 12, class: "group-name" }, group.label),
+      svgNode("text", { x: compact ? width - 4 : 0, y: compact ? y - 12 : y + 32, "text-anchor": compact ? "end" : "start" }, `${fmt(group.area_min_sqft)}–${fmt(group.area_max_sqft)} ft²`),
+      svgNode("rect", { x: left, y, width: scale(group.median_density_w_per_sqft), height: 24, fill: index === 3 ? "var(--accent)" : "var(--soft-blue)" }),
+      svgNode("text", { x: left + scale(group.median_density_w_per_sqft) + 12, y: y + 17, class: "group-value" }, fmt(group.median_density_w_per_sqft)),
+    );
+  });
+  $("size-chart").replaceChildren(svg);
+}
+narrowChart.addEventListener("change", () => {
+  if (report?.breakdowns.size_density) renderSizeChart(report.breakdowns.size_density.groups);
+});
+
+function renderAnalysis() {
+  const analysis = report.breakdowns.size_density;
+  $("size-chart").replaceChildren();
+  $("size-checks").replaceChildren();
+  $("facility-examples").replaceChildren();
+  $("quality-size").hidden = true;
+  $("facility-case-study").hidden = true;
+  $("carrier-question").hidden = true;
+  $("size-method").hidden = !analysis;
+  $("size-caption").textContent = "";
+  if (!analysis) {
+    $("size-finding").textContent = "Size comparisons are unavailable for this dataset.";
+    return;
+  }
+  const groups = analysis.groups;
+  const first = groups[0], last = groups.at(-1);
+  $("size-finding").textContent = `The largest quarter by floor area advertises a median of ${fmt(last.median_density_w_per_sqft)} W/ft², compared with ${fmt(first.median_density_w_per_sqft)} W/ft² in the smallest quarter. That is ${fmt(analysis.largest_to_smallest_median_ratio, 1)} times as much power per square foot.`;
+  const missing = report.quality.carrier_coverage.missing_count;
+  if (missing) {
+    $("quality-size").textContent = `${last.missing_carriers} of the ${missing} facilities with unknown carrier counts fall in the largest quarter by floor area.`;
+    $("quality-size").hidden = false;
+  }
+  renderSizeChart(groups);
+  const counts = groups.map((g) => g.facility_count);
+  const countText = new Set(counts).size === 1 ? `${counts[0]} facilities in each group.` : `Group sizes: ${counts.join(", ")} facilities.`;
+  $("size-caption").textContent = `${countText} Ranges show IT floor area. This comparison uses the full dataset, regardless of filters above.`;
+  analysis.checks.forEach((check) => {
+    const row = node("tr");
+    row.append(node("td", check.label), node("td", fmt(check.facility_count), "numeric"), node("td", fmt(check.area_density_spearman, 2), "numeric"));
+    $("size-checks").append(row);
+  });
+  $("size-check-description").hidden = analysis.checks.length < 2;
+  const carrier = analysis.power_carriers;
+  if (carrier.spearman != null) {
+    const missingNote = carrier.missing_count ? ` The ${carrier.missing_count} unknown counts are excluded.` : "";
+    const sizeNote = carrier.missing_count && last.missing_carriers === carrier.missing_count ? " All of those are in the largest size group, leaving a gap in this comparison." : "";
+    $("carrier-finding").textContent = `For the ${carrier.facility_count} facilities with reported carrier counts, the rank correlation between advertised power and carrier count is ${fmt(carrier.spearman, 2)}.${missingNote}${sizeNote}`;
+    $("carrier-question").hidden = false;
+  }
+  const examples = ["DFW1", "DFW8"].map((code) => facilities.find((f) => f.facility_code === code));
+  if (examples.every((f) => f && reviewedNote(f.facility_code))) {
+    const [a, b] = examples;
+    $("case-finding").textContent = `DFW8 has ${pct(1 - b.it_area_sqft / a.it_area_sqft)} less IT floor area than DFW1, but advertises ${fmt(b.critical_it_mw / a.critical_it_mw, 1)} times the power. Its power density is ${fmt(b.capacity_density_w_per_sqft / a.capacity_density_w_per_sqft, 1)} times that of DFW1.`;
+    examples.forEach((f) => {
+      const note = reviewedNote(f.facility_code);
+      const card = node("article", null, "case-example");
+      const metrics = node("dl", null, "case-metrics");
+      metrics.append(metric("IT floor area", `${fmt(f.it_area_sqft)} ft²`), metric("Advertised power", `${fmt(f.critical_it_mw)} MW`), metric("Power density", `${fmt(f.capacity_density_w_per_sqft)} W/ft²`));
+      card.append(node("h4", `${f.facility_code}: ${note.title}`), metrics, node("p", note.text, "small"));
+      if (note.caveat) card.append(node("p", note.caveat, "small muted"));
+      const actions = node("div", null, "case-actions");
+      const inspect = node("button", "Inspect figures", "text-button");
+      inspect.type = "button";
+      inspect.addEventListener("click", () => showEvidence(f, inspect));
+      actions.append(link("Source page ↗", f.detail_url), inspect);
+      card.append(actions);
+      $("facility-examples").append(card);
+    });
+    $("facility-case-study").hidden = false;
+  }
+}
+
 function filteredRows() {
   const query = $("search").value.trim().toLowerCase(), market = $("market").value;
   return facilities.filter((f) => (!market || f.market === market) && (!$("missing").checked || f.onsite_carriers == null) && [f.facility_code, f.facility_name, marketName(f.market), f.address_raw, f.campus_name].join(" ").toLowerCase().includes(query)).sort((a, b) => {
@@ -158,6 +270,7 @@ function filteredRows() {
 function renderFacilities() {
   const rows = filteredRows();
   $("result-count").textContent = `${rows.length} of ${facilities.length} facilities`;
+  $("result-count").hidden = rows.length === facilities.length;
   $("empty").hidden = rows.length > 0;
   $("evidence").hidden = true;
   const body = $("facility-rows"); body.replaceChildren();
@@ -187,7 +300,8 @@ function showEvidence(f, trigger) {
   $("evidence-time").textContent = `Page saved ${date(f.fetched_at)}. We do not know when these figures were last updated.`;
   const notes = $("evidence-notes"); notes.replaceChildren();
   if (f.onsite_carriers == null) listItem(notes, "Carrier count is unknown; it is not treated as zero.");
-  if (f.facility_code === "DFW12" && reviewedDFW12()) listItem(notes, "The saved description uses future tense. It does not confirm whether the facility is open or has capacity available to rent.", f.detail_url);
+  const reading = reviewedNote(f.facility_code);
+  if (reading) listItem(notes, [reading.text, reading.caveat].filter(Boolean).join(" "), f.detail_url);
   report.quality.reconciliation.filter((item) => item.status === "conflict" && item.source_url === f.market_url).forEach((item) => listItem(notes, `Market context, not a change to this facility: ${conflictText(item)}`, item.source_url));
   report.quality.card_detail_conflicts.filter((item) => item.facility_url === f.detail_url).forEach((item) => listItem(notes, `The published ${fieldLabel[item.field] ?? item.field} values differ. We use the facility page's main figure, or its specification table if the main figure is absent.`));
   if (!notes.children.length) listItem(notes, "The published figures agree across the pages we checked. We have not independently verified them.");
@@ -238,9 +352,15 @@ function selectSection(id) {
   });
 }
 navLinks.forEach((link) => link.addEventListener("click", () => selectSection(link.hash.slice(1))));
-const sectionObserver = new IntersectionObserver((entries) => {
-  for (const entry of entries) if (entry.isIntersecting) selectSection(entry.target.classList.contains("intro") ? "quality" : entry.target.id);
-}, { rootMargin: "-15% 0px -65% 0px" });
-document.querySelectorAll("main > #study > section").forEach((section) => sectionObserver.observe(section));
-sectionObserver.observe(document.querySelector(".intro"));
+const sections = navLinks.map((link) => document.querySelector(link.hash));
+function followScroll() {
+  if ($("study").hidden) return;
+  const atBottom = Math.ceil(scrollY + innerHeight) >= document.documentElement.scrollHeight;
+  const anchorLine = parseFloat(getComputedStyle(sections[0]).scrollMarginTop) + 1;
+  const current = atBottom ? sections.at(-1) : sections.findLast((section) => section.getBoundingClientRect().top <= anchorLine) ?? sections[0];
+  selectSection(current.id);
+}
+addEventListener("scroll", followScroll, { passive: true });
+addEventListener("resize", followScroll);
 await load();
+followScroll();

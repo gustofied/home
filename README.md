@@ -98,6 +98,8 @@ I start with data quality, then compare markets and facilities. The frontend mak
 
 Dallas, Northern Virginia and Atlanta contain 73.5% of advertised capacity across 24 of 76 facilities. Median facility density is 118 W/ft²; total power divided by total IT area is 206 W/ft². The first weights facilities equally; the second weights by area.
 
+Floor space alone misses differences in power capacity. Across four size groups of 19 facilities, median density rises from 63 to 249 W/ft². All six unknown carrier counts fall in the largest group. DFW8 advertises less floor area than DFW1 but 5.7 times the power; their saved descriptions emphasise cooling and connectivity respectively.
+
 ##### Why this data
 
 Comparable facility specifications with source pages we can inspect and replay.
@@ -108,7 +110,7 @@ One operator, 27 markets and 76 facilities. Advertised inventory; operating stat
 
 ##### My analysis
 
-Quality first, then concentration and facility differences. Counts alone hide how much capacity sits behind missing information. Advertised MW do not establish operating status, availability, utilisation or GPU performance.
+I compare group medians so a single extreme facility cannot dominate. The positive size–density relationship remains after excluding Dallas and Northern Virginia. A separate idea, that higher-power sites have fewer carriers, finds little support in the 70 known counts (rank correlation −0.03). These comparisons describe the published specifications; they do not establish what causes the differences.
 
 ##### Visualising the data
 
