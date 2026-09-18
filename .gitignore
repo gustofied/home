@@ -22,6 +22,8 @@ dist/
 # Local data runs
 /data/bronze/*
 !/data/bronze/.gitkeep
+!/data/bronze/example/
+!/data/bronze/example/**
 /data/silver/*
 !/data/silver/.gitkeep
 /data/gold/*

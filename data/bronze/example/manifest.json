@@ -1,0 +1,91 @@
+{
+  "all_markets": false,
+  "data_kind": "synthetic",
+  "pages": [
+    {
+      "attempt": 1,
+      "elapsed_seconds": 0,
+      "fetched_at": "2026-01-01T00:00:00+00:00",
+      "final_url": "https://www.databank.com/robots.txt",
+      "headers": {
+        "content-type": "text/html; charset=utf-8"
+      },
+      "path": "pages/a9c8b0ed63f9ff78190b-1.html",
+      "requested_url": "https://www.databank.com/robots.txt",
+      "sha256": "1edb2b7e5afbb148ab30cb2d0b9bfa34a51586eab1e9c92a99725a1a4a654fbf",
+      "status_code": 200
+    },
+    {
+      "attempt": 1,
+      "elapsed_seconds": 0,
+      "fetched_at": "2026-01-01T00:00:00+00:00",
+      "final_url": "https://www.databank.com/data-centers/chicago/600-south-federal-street/",
+      "headers": {
+        "content-type": "text/html; charset=utf-8"
+      },
+      "path": "pages/4dc0ebcc3c1ccae67332-1.html",
+      "requested_url": "https://www.databank.com/data-centers/chicago/600-south-federal-street/",
+      "sha256": "23fca7a5ce46b72afb23582f2b093dd545d9c2a0a0870089df45f0bd476f16fc",
+      "status_code": 200
+    },
+    {
+      "attempt": 1,
+      "elapsed_seconds": 0,
+      "fetched_at": "2026-01-01T00:00:00+00:00",
+      "final_url": "https://www.databank.com/data-centers/chicago/840-canal-street/",
+      "headers": {
+        "content-type": "text/html; charset=utf-8"
+      },
+      "path": "pages/ec334efc917ef41027f3-1.html",
+      "requested_url": "https://www.databank.com/data-centers/chicago/840-canal-street/",
+      "sha256": "7c8e85971430ed874cc786624aaebe33798f957bef6607625bb54c8f83e9857d",
+      "status_code": 200
+    },
+    {
+      "attempt": 1,
+      "elapsed_seconds": 0,
+      "fetched_at": "2026-01-01T00:00:00+00:00",
+      "final_url": "https://www.databank.com/data-centers/chicago/mount-prospect/",
+      "headers": {
+        "content-type": "text/html; charset=utf-8"
+      },
+      "path": "pages/f86239eab1fae21982d3-1.html",
+      "requested_url": "https://www.databank.com/data-centers/chicago/mount-prospect/",
+      "sha256": "618ccd1457319ffb3a615b82f7be9f3d0d4cfaa35736bba4c917b7d7376c2073",
+      "status_code": 200
+    },
+    {
+      "attempt": 1,
+      "elapsed_seconds": 0,
+      "fetched_at": "2026-01-01T00:00:00+00:00",
+      "final_url": "https://www.databank.com/data-centers/chicago/oak-brook/",
+      "headers": {
+        "content-type": "text/html; charset=utf-8"
+      },
+      "path": "pages/6df32812980bc9503dd8-1.html",
+      "requested_url": "https://www.databank.com/data-centers/chicago/oak-brook/",
+      "sha256": "43651bf7945a810fde7ccf8a33e9dd04e55c8e6641dca6a07084d08ff5cf3ab4",
+      "status_code": 200
+    },
+    {
+      "attempt": 1,
+      "elapsed_seconds": 0,
+      "fetched_at": "2026-01-01T00:00:00+00:00",
+      "final_url": "https://www.databank.com/data-centers/chicago/",
+      "headers": {
+        "content-type": "text/html; charset=utf-8"
+      },
+      "path": "pages/2caa64f649bdc0c618ae-1.html",
+      "requested_url": "https://www.databank.com/data-centers/chicago/",
+      "sha256": "6c4f53d7afb05df6a3ff541d2600dc943bef332277582fbf977b0cfd9cf0a632",
+      "status_code": 200
+    }
+  ],
+  "parser_version": "1",
+  "request_errors": [],
+  "run_id": "example",
+  "scope": [
+    "https://www.databank.com/data-centers/chicago/"
+  ],
+  "status": "example"
+}
