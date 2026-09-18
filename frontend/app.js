@@ -2,7 +2,12 @@ const $ = (id) => document.getElementById(id);
 const fmt = (value, digits = 0) => value == null ? "Unknown" : Number(value).toLocaleString("en-GB", { maximumFractionDigits: digits });
 const pct = (value) => value == null ? "Unknown" : `${fmt(value * 100, 1)}%`;
 const marketName = (slug) => slug.split("-").map((word) => word[0].toUpperCase() + word.slice(1)).join(" ");
-const date = (value) => new Date(value).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short", timeZone: "UTC" }) + " UTC";
+const date = (value) => {
+  const instant = new Date(value);
+  const day = instant.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" }).replace(/\bSept\b/, "Sep");
+  const time = instant.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit", hourCycle: "h23", timeZone: "UTC" });
+  return `${day} at ${time} UTC`;
+};
 const fieldLabel = { critical_it_mw: "IT load", it_area_sqft: "IT floor area", onsite_carriers: "Carriers" };
 const units = { critical_it_mw: " MW", it_area_sqft: " ft²", onsite_carriers: "" };
 const origins = { card: "Market card", detail_main: "Facility headline", detail_specs: "Facility specification" };
@@ -54,7 +59,9 @@ function conflictText(item) {
 
 function renderOverview() {
   const s = report.summary, q = report.quality, c = q.carrier_coverage;
-  $("collection").textContent = `${report.source.data_kind === "synthetic" ? "Synthetic example" : "Source: DataBank"} — collected ${date(report.as_of)}`;
+  const reportTime = node("time", date(report.as_of));
+  reportTime.dateTime = report.as_of;
+  $("collection").replaceChildren(node("span", report.source.data_kind === "synthetic" ? "Synthetic example" : "Latest report", "report-label"), " ", reportTime);
   $("run-id").textContent = `Run ${report.run_id}`;
   $("totals").replaceChildren(metric("Facilities", fmt(s.facility_count)), metric("Markets", fmt(s.market_count)), metric("Advertised IT capacity", `${fmt(s.critical_it_mw, 1)} MW`), metric("IT floor area", `${fmt(s.it_area_sqft)} ft²`));
   $("quality-finding").textContent = `${c.missing_count} of ${c.facility_count} facilities (${pct(c.missing_facility_share)}) have no known carrier count. They represent ${pct(c.missing_capacity_share)} of advertised capacity: ${fmt(c.missing_capacity_mw, 3)} of ${fmt(c.total_capacity_mw, 3)} MW.`;

@@ -2,12 +2,13 @@
   color-scheme: light;
   --paper: #fbfafa;
   --ink: oklch(0.14 0.005 285.8);
-  --accent: #153873;
+  --accent: #3c526f;
   --muted: #686774;
   --line: #ecebf5;
   --wash: color-mix(in srgb, var(--accent) 4%, var(--paper));
   --soft-blue: color-mix(in srgb, var(--accent) 45%, var(--paper));
   --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --display: Georgia, "Times New Roman", serif;
   font-family: system-ui, sans-serif;
   color: var(--ink);
   background: var(--paper);
@@ -28,9 +29,9 @@ button:active { transform: translateY(1px); }
 input[type="checkbox"] { accent-color: var(--accent); }
 .masthead, main, footer { max-width: 1200px; margin: auto; padding-inline: 32px; }
 .masthead { display: grid; grid-template-columns: 1fr auto; align-items: stretch; padding: 0; border: 1px solid var(--line); border-top: 2px solid var(--accent); position: sticky; top: 0; z-index: 5; background: var(--paper); }
-.identity { display: flex; align-items: center; gap: 24px; padding: 16px 32px; }
-.brand { color: var(--accent); font-family: var(--mono); font-size: 30px; line-height: 36px; letter-spacing: -.08em; font-weight: 700; text-decoration: none; }
-.brand-description { color: var(--muted); font-family: var(--mono); font-size: 12px; line-height: 16px; }
+.identity { display: flex; align-items: center; gap: 24px; padding: 16px 32px; min-width: 0; }
+.brand { color: var(--accent); font-family: var(--display); font-size: 30px; line-height: 36px; letter-spacing: .04em; font-weight: 400; text-decoration: none; }
+.brand-description { color: var(--muted); font-size: 14px; line-height: 20px; max-width: 28ch; }
 nav { display: flex; align-items: center; gap: 4px; padding: 16px 24px; border-left: 1px solid var(--line); font-family: var(--mono); font-size: 12px; }
 nav a { display: flex; gap: 8px; padding: 8px 12px; color: var(--muted); text-decoration: none; border: 1px solid transparent; }
 nav a span { opacity: .65; }
@@ -38,7 +39,9 @@ nav a:hover { background: var(--wash); border-color: var(--line); }
 nav a[aria-current] { background: var(--accent); color: var(--paper); border-color: var(--accent); }
 .intro { padding-block: 48px 24px; }
 .eyebrow { color: var(--muted); font-family: var(--mono); font-size: 12px; line-height: 16px; letter-spacing: .02em; }
-h1 { color: var(--accent); font-size: clamp(36px, 5vw, 48px); font-weight: 600; line-height: 1; letter-spacing: -.045em; margin: 24px 0; text-wrap: balance; }
+h1 { color: var(--accent); font-family: var(--display); font-size: clamp(36px, 5vw, 48px); font-weight: 400; line-height: 1; letter-spacing: -.025em; margin: 24px 0; text-wrap: balance; }
+.report-meta { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 12px; row-gap: 4px; }
+.report-label { color: var(--accent); }
 h2 { font-size: 16px; line-height: 24px; font-weight: 500; margin: 0; }
 h3 { font-size: 24px; line-height: 32px; font-weight: 500; letter-spacing: -.025em; margin: 0 0 12px; text-wrap: balance; }
 p { max-width: 72ch; margin: 0 0 16px; text-wrap: pretty; }
@@ -118,7 +121,7 @@ footer { display: flex; gap: 24px; flex-wrap: wrap; justify-content: space-betwe
 .skip:focus { display: block; padding: 16px; }
 @media (max-width: 960px) {
   .identity { gap: 12px; padding-inline: 24px; }
-  .brand-description { max-width: 80px; }
+  .brand-description { max-width: 22ch; }
   nav { padding-inline: 16px; }
   nav a { padding-inline: 8px; }
 }
@@ -126,7 +129,7 @@ footer { display: flex; gap: 24px; flex-wrap: wrap; justify-content: space-betwe
   .masthead, main, footer { padding-inline: 16px; }
   .masthead { grid-template-columns: 1fr; padding-inline: 0; }
   .identity { justify-content: space-between; padding: 12px 16px; }
-  .brand-description { max-width: none; }
+  .brand-description { max-width: 24ch; }
   nav { justify-content: space-between; padding: 8px; border-left: 0; border-top: 1px solid var(--line); gap: 0; }
   nav a { gap: 4px; padding: 8px; }
   nav a span { display: none; }
