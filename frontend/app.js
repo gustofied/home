@@ -62,7 +62,7 @@ function renderOverview() {
   const reportTime = node("time", date(report.as_of));
   reportTime.dateTime = report.as_of;
   $("collection").replaceChildren(node("span", report.source.data_kind === "synthetic" ? "Synthetic example" : "Latest report", "report-label"), " ", reportTime);
-  $("run-id").textContent = `Run ${report.run_id}`;
+  $("run-id").textContent = `Data provenance ${report.run_id}`;
   $("totals").replaceChildren(metric("Facilities", fmt(s.facility_count)), metric("Markets", fmt(s.market_count)), metric("Advertised IT capacity", `${fmt(s.critical_it_mw, 1)} MW`), metric("IT floor area", `${fmt(s.it_area_sqft)} ft²`));
   $("quality-finding").textContent = `${c.missing_count} of ${c.facility_count} facilities (${pct(c.missing_facility_share)}) have no known carrier count. They represent ${pct(c.missing_capacity_share)} of advertised capacity: ${fmt(c.missing_capacity_mw, 3)} of ${fmt(c.total_capacity_mw, 3)} MW.`;
   $("missing-chart").replaceChildren(proportion("Facilities with unknown carriers", c.missing_facility_share), proportion("Capacity at those facilities", c.missing_capacity_share));
