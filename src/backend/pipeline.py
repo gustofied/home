@@ -31,7 +31,7 @@ class RunResult:
     accepted: int
     rejected: int
     report_path: Path
-    bronze_path: Path
+    raw_path: Path
 
 
 def run_pipeline(
@@ -63,7 +63,7 @@ def run_pipeline(
     all_markets = original["all_markets"] if original else all_markets
     started = datetime.now(UTC)
     run_id = started.strftime("%Y%m%dT%H%M%S") + "-" + uuid4().hex[:8]
-    bronze = data_dir / "bronze" / run_id
+    raw = data_dir / "raw" / run_id
     silver = data_dir / "silver" / run_id
     gold = data_dir / "gold" / run_id
     manifest = {
@@ -80,7 +80,7 @@ def run_pipeline(
     }
     candidates, observations, rejected, records, failures = [], [], [], [], []
     seen_urls, seen_codes = set(), set()
-    with Fetcher(bronze, manifest, replay=from_snapshot, interval=interval) as fetcher:
+    with Fetcher(raw, manifest, replay=from_snapshot, interval=interval) as fetcher:
         fetcher.save_manifest()
         try:
             fetcher.check_robots()
@@ -257,9 +257,9 @@ def run_pipeline(
     published = quality["gate"] == "passed"
     manifest["status"] = "complete" if published else "failed_quality"
     manifest["completed_at"] = datetime.now(UTC).isoformat()
-    write_json(bronze / "manifest.json", manifest)
+    write_json(raw / "manifest.json", manifest)
     if published:
         write_json(data_dir / "latest.json", {"run_id": run_id})
     return RunResult(
-        run_id, published, len(records), len(rejected), gold / "report.json", bronze
+        run_id, published, len(records), len(rejected), gold / "report.json", raw
     )

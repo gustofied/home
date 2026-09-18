@@ -27,7 +27,7 @@ def test_missing_results_and_published_contracts(tmp_path, monkeypatch):
     monkeypatch.setattr(settings, "data_dir", tmp_path)
     assert client.get("/api/overview").status_code == 503
     assert client.get("/api/facilities").status_code == 503
-    example = Path(__file__).resolve().parents[1] / "data" / "bronze" / "example"
+    example = Path(__file__).resolve().parents[1] / "data" / "raw" / "example"
     run_pipeline(tmp_path, from_snapshot=example)
     overview = client.get("/api/overview")
     assert overview.status_code == 200

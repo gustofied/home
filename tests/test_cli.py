@@ -16,7 +16,7 @@ def test_help() -> None:
 
 
 def test_offline_cli_and_exclusive_options(tmp_path):
-    example = Path(__file__).resolve().parents[1] / "data" / "bronze" / "example"
+    example = Path(__file__).resolve().parents[1] / "data" / "raw" / "example"
     result = runner.invoke(
         app, ["run", "--from-snapshot", str(example), "--data-dir", str(tmp_path)]
     )

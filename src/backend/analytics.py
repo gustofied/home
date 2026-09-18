@@ -99,10 +99,10 @@ def analyze(
             "limitations": [
                 "Single operator's advertised inventory, not global market share.",
                 "Operating, planned and expansion status is not consistently available; totals are not confirmed operational capacity.",
-                "Retrieval time is not source freshness. Last-Modified, when supplied, is stored in the Bronze manifest and is not necessarily metric freshness.",
+                "Retrieval time is not source freshness. Last-Modified, when supplied, is stored in the raw snapshot manifest and is not necessarily metric freshness.",
                 "Campus/market aggregates are excluded from facility rows. Missing values are never imputed as zero.",
                 "Uncertain or incomplete facilities are rejected visibly; failed quality gates never replace the published run.",
-                "Publicly accessible source; no open-data license asserted. Full HTML stays local.",
+                "Publicly accessible source; no open-data license asserted. Raw captures contain HTML and response metadata; images are not downloaded.",
             ],
         },
         source=source,

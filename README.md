@@ -6,8 +6,8 @@ Requires Python 3.13 and [uv](https://docs.astral.sh/uv/).
 
 ```bash
 uv sync --locked
-uv run backend run --market chicago
-# Or: uv run backend run --all-markets
+uv run backend run --from-snapshot data/raw/20260918T081720-ab352538
+# Refresh from the website: uv run backend run --all-markets
 uv run backend serve
 ```
 
@@ -17,9 +17,7 @@ Optional settings are in `.env.example`.
 
 ```bash
 # Offline synthetic example; separate output directory preserves live results.
-uv run backend run --from-snapshot data/bronze/example --data-dir /tmp/databank-example
-# Replay a live snapshot without network access.
-uv run backend run --from-snapshot data/bronze/<run_id>
+uv run backend run --from-snapshot data/raw/example --data-dir /tmp/databank-example
 ```
 
 ## Checks
@@ -30,5 +28,5 @@ uv run ruff check .
 uv run ruff format --check .
 ```
 
-`./scripts/demo.sh` replays the synthetic example, checks the API and stops the server afterward.
+`./scripts/demo.sh` replays the included raw capture, checks the API and stops the server afterward.
 Set `PORT=18080` to use another port.

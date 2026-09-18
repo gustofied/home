@@ -32,7 +32,7 @@ def run(
         typer.Option(
             exists=True,
             file_okay=False,
-            help="Replay a Bronze directory without network access",
+            help="Replay a raw snapshot directory without network access",
         ),
     ] = None,
     data_dir: Annotated[
@@ -60,7 +60,7 @@ def run(
                 "accepted": result.accepted,
                 "rejected": result.rejected,
                 "report": str(result.report_path),
-                "snapshot": str(result.bronze_path),
+                "snapshot": str(result.raw_path),
             }
         )
     )

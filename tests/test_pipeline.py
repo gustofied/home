@@ -14,7 +14,7 @@ from backend.pipeline import run_pipeline
 from backend.quality import assess_quality
 from backend.storage import read_facilities, write_json, write_snapshot
 
-EXAMPLE = Path(__file__).resolve().parents[1] / "data" / "bronze" / "example"
+EXAMPLE = Path(__file__).resolve().parents[1] / "data" / "raw" / "example"
 
 
 @pytest.fixture
@@ -196,8 +196,8 @@ def test_full_portfolio_count_drop_is_checked_when_market_discovery_changes(
         },
     )
 
-    def saved_fetcher(bronze, run_manifest, **kwargs):
-        return Fetcher(bronze, run_manifest, replay=snapshot)
+    def saved_fetcher(raw, run_manifest, **kwargs):
+        return Fetcher(raw, run_manifest, replay=snapshot)
 
     monkeypatch.setattr("backend.pipeline.Fetcher", saved_fetcher)
     result = run_pipeline(tmp_path, all_markets=True)

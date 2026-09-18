@@ -45,9 +45,9 @@ def write_csv(path: Path, values: list[dict], fields: list[str]) -> None:
         writer.writerows(values)
 
 
-def write_snapshot(bronze: Path, snapshot: SourceSnapshot) -> dict:
+def write_snapshot(raw: Path, snapshot: SourceSnapshot) -> dict:
     filename = f"pages/{hashlib.sha256(snapshot.requested_url.encode()).hexdigest()[:20]}-{snapshot.attempt}.html"
-    path = bronze / filename
+    path = raw / filename
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_bytes(snapshot.content)
     entry = asdict(snapshot)
@@ -57,14 +57,14 @@ def write_snapshot(bronze: Path, snapshot: SourceSnapshot) -> dict:
     return entry
 
 
-def read_snapshot(bronze: Path, url: str) -> SourceSnapshot:
-    manifest = json.loads((bronze / "manifest.json").read_text())
+def read_snapshot(raw: Path, url: str) -> SourceSnapshot:
+    manifest = json.loads((raw / "manifest.json").read_text())
     entries = [entry for entry in manifest["pages"] if entry["requested_url"] == url]
     if not entries:
         raise ValueError(f"Snapshot has no response for {url}; network is disabled")
     entry = entries[-1].copy()
-    path = (bronze / entry.pop("path")).resolve()
-    if not path.is_relative_to(bronze.resolve()):
+    path = (raw / entry.pop("path")).resolve()
+    if not path.is_relative_to(raw.resolve()):
         raise ValueError("Snapshot body path escapes its directory")
     content = path.read_bytes()
     if hashlib.sha256(content).hexdigest() != entry["sha256"]:

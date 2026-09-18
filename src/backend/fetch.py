@@ -40,14 +40,14 @@ class Fetcher:
 
     def __init__(
         self,
-        bronze: Path,
+        raw: Path,
         manifest: dict,
         *,
         replay: Path | None = None,
         interval: float = 1.0,
         client: httpx2.Client | None = None,
     ):
-        self.bronze = bronze
+        self.raw = raw
         self.manifest = manifest
         self.replay = replay
         self.interval = interval
@@ -72,7 +72,7 @@ class Fetcher:
             self.client.close()
 
     def save_manifest(self):
-        write_json(self.bronze / "manifest.json", self.manifest)
+        write_json(self.raw / "manifest.json", self.manifest)
 
     def fetch(self, url: str) -> SourceSnapshot:
         if url in self.cache:
@@ -105,7 +105,7 @@ class Fetcher:
             self.interval = max(self.interval, float(delay))
 
     def _persist(self, snapshot):
-        entry = write_snapshot(self.bronze, snapshot)
+        entry = write_snapshot(self.raw, snapshot)
         self.manifest["pages"].append(entry)
         self.save_manifest()
 
