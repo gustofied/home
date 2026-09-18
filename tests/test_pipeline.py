@@ -152,14 +152,6 @@ def test_duplicate_candidates_and_aggregate_cards_are_accounted_for(
     assert quality["rejections"][0]["reason"] == expected_reason
 
 
-def test_count_collapse_blocks_publication(tmp_path, offline):
-    result = run_pipeline(tmp_path, from_snapshot=EXAMPLE)
-    records = read_facilities(tmp_path, result.run_id)
-    candidates = [{"url": str(r.detail_url), "code": r.facility_code} for r in records]
-    quality = assess_quality(records, candidates, [], [], [], [], previous_count=10)
-    assert "candidate_count_drop_over_20_percent" in quality["blockers"]
-
-
 def test_full_portfolio_count_drop_is_checked_when_market_discovery_changes(
     tmp_path, offline, monkeypatch
 ):

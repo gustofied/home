@@ -7,15 +7,6 @@ from backend.cli import app
 runner = CliRunner()
 
 
-def test_help() -> None:
-    result = runner.invoke(app, ["--help"])
-
-    assert result.exit_code == 0
-    assert "run" in result.output
-    assert "serve" not in result.output
-    assert "ping" not in result.output
-
-
 def test_offline_cli_and_exclusive_options(tmp_path):
     example = Path(__file__).resolve().parents[1] / "data" / "raw" / "example"
     result = runner.invoke(

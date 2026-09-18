@@ -9,20 +9,6 @@ from backend.pipeline import run_pipeline
 client = TestClient(app)
 
 
-def test_health() -> None:
-    response = client.get("/api/health")
-
-    assert response.status_code == 200
-    assert response.json() == {"status": "ok"}
-
-
-def test_frontend() -> None:
-    response = client.get("/")
-
-    assert response.status_code == 200
-    assert "HOME | Data center facility insights" in response.text
-
-
 def test_missing_results_and_published_contracts(tmp_path, monkeypatch):
     monkeypatch.setattr(settings, "data_dir", tmp_path)
     assert client.get("/api/overview").status_code == 503

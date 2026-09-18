@@ -1,3 +1,4 @@
+import json
 from datetime import UTC, datetime
 from pathlib import Path
 
@@ -7,7 +8,6 @@ from backend.analytics import analyze
 from backend.models import FacilityRecord
 from backend.pipeline import run_pipeline
 from backend.quality import assess_quality
-from backend.storage import read_facilities
 
 
 def test_weighted_missingness_and_density_use_different_denominators():
@@ -55,17 +55,14 @@ def test_saved_portfolio_findings(tmp_path, monkeypatch):
     data = Path(__file__).resolve().parents[1] / "data"
     result = run_pipeline(tmp_path, from_snapshot=data / "raw/20260918T081720-ab352538")
     assert result.published
-    records = read_facilities(tmp_path, result.run_id)
-    candidates = [{"url": str(r.detail_url), "code": r.facility_code} for r in records]
-    quality = assess_quality(records, candidates, [], [], [], [])
-    report = analyze(records, quality, "test", records[0].fetched_at, {})
-    assert len(records) == 76
+    report = json.loads(result.report_path.read_text())
+    quality = report["quality"]
+    summary = report["summary"]
+    assert summary["facility_count"] == 76
     assert quality["carrier_coverage"]["missing_count"] == 6
     assert quality["carrier_coverage"]["missing_capacity_share"] == pytest.approx(
         0.395, abs=0.0005
     )
-    assert report.summary["top_three_market_facility_count"] == 24
-    assert report.summary["top_three_market_capacity_share"] == pytest.approx(
-        0.73517439
-    )
-    assert report.summary["portfolio_density_w_per_sqft"] == 205.622
+    assert summary["top_three_market_facility_count"] == 24
+    assert summary["top_three_market_capacity_share"] == pytest.approx(0.73517439)
+    assert summary["portfolio_density_w_per_sqft"] == 205.622

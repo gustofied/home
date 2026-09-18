@@ -12,16 +12,16 @@
   <a class="skip" href="#content">Skip to content</a>
   <header class="masthead">
     <div class="identity"><a class="brand" href="/" aria-label="HOME">HOME</a><span class="brand-description">A home for data center facility insights</span></div>
-    <nav aria-label="Sections"><a href="#quality" aria-current="location"><span>01</span> Quality</a><a href="#portfolio"><span>02</span> Portfolio</a><a href="#comparison"><span>03</span> Facilities</a><a href="#method"><span>04</span> Method</a></nav>
+    <nav aria-label="Sections"><a href="#quality" aria-current="location"><span>01</span> Quality</a><a href="#portfolio"><span>02</span> Portfolio</a><a href="#comparison"><span>03</span> Facilities</a><a href="#about"><span>04</span> About</a></nav>
   </header>
   <main id="content">
     <header class="intro">
       <p class="eyebrow report-meta" id="collection">Latest report</p>
       <h1>Data center capacity.</h1>
       <p class="lede">Where is advertised capacity concentrated, how do facilities differ, and how much can we trust the published information?</p>
-      <p class="muted">One row per facility. Critical IT load is advertised power capacity, not electricity use or capacity available to buy.</p>
+      <p class="muted">Figures describe individual facilities, their advertised power capacity and IT floor area.</p>
     </header>
-    <p id="status" role="status">Loading the published snapshot…</p>
+    <p id="status" role="status">Loading data…</p>
     <button id="retry" type="button" hidden>Retry loading</button>
     <noscript>This explorer needs JavaScript. See <a href="/api/overview">the report API</a> for the published data.</noscript>
     <div id="study" hidden>
@@ -29,7 +29,7 @@
       <section id="quality" class="section">
         <div class="section-label"><span>01</span><h2>Coverage and quality</h2></div>
         <div class="quality-layout">
-          <div><h3>Missing information is concentrated, too.</h3><p id="quality-finding"></p><p class="muted">Carrier counts describe listed connections. They cannot establish network quality or latency, and an unknown count is not zero.</p><button id="missing-filter" class="text-button" type="button">Inspect facilities with unknown carriers →</button></div>
+          <div><h3>Missing information is concentrated, too.</h3><p id="quality-finding"></p><p class="muted">Carrier counts show how many network providers are listed at each site. They do not measure connection speed or latency.</p><button id="missing-filter" class="text-button" type="button">View facilities with unknown carriers →</button></div>
           <div><div id="missing-chart" class="proportions"></div><p id="quality-status" class="small"></p><details><summary id="issue-summary">Source discrepancies</summary><ul id="issues" class="issue-list"></ul></details></div>
         </div>
       </section>
@@ -39,7 +39,7 @@
         <div class="market-head"><span>Market</span><span>Advertised IT capacity</span><span>Facilities</span></div>
         <div id="market-chart" aria-label="Advertised capacity by market"></div>
         <button id="all-markets" class="market-toggle" type="button" aria-expanded="false" aria-controls="market-chart">Show all markets</button>
-        <p class="small muted">Shares use all accepted facilities in this snapshot. They describe one operator's published inventory, not global market share.</p>
+        <p class="small muted">All percentages refer to the DataBank facilities shown here.</p>
       </section>
       <section id="comparison" class="section">
         <div class="section-label"><span>03</span><h2>Facility comparison</h2></div>
@@ -51,7 +51,7 @@
           <button id="reset-filters" type="button">Reset</button>
         </form>
         <div class="chart-toolbar"><p id="result-count" role="status"></p><label class="check"><input id="log-scale" type="checkbox" checked>Log axes</label></div>
-        <figure class="scatter"><div id="scatter-chart"></div><figcaption>Each point is one facility; identical specifications overlap. Select a point or table code for evidence. Filled = carrier count known; hollow = unknown. Filters affect the chart and table; portfolio findings above remain unchanged.</figcaption></figure>
+        <figure class="scatter"><div id="scatter-chart"></div><figcaption>Each point is one facility; identical specifications overlap. Select a point or facility code for source details. Filled = carrier count known; hollow = unknown. Filters affect the chart and table; the totals above cover all facilities.</figcaption></figure>
         <p id="empty" hidden>No facilities match these filters. Try a different search or reset.</p>
         <div class="table-scroll" tabindex="0" aria-label="Facility comparison table">
           <table id="facility-table"><caption class="sr-only">Filtered DataBank facilities. Select a column heading to sort.</caption><thead><tr>
@@ -68,17 +68,20 @@
           <div class="evidence-heading"><div><p class="eyebrow">Source details</p><h3 id="evidence-title"></h3></div><button id="close-evidence" type="button">Close</button></div>
           <p id="evidence-address"></p><dl id="evidence-values" class="evidence-values"></dl><p id="evidence-links"></p><p id="evidence-time" class="small muted"></p>
           <ul id="evidence-notes" class="issue-list"></ul>
-          <details open><summary>Original published values</summary><div class="table-scroll"><table><thead><tr><th>Source</th><th>Label</th><th>Original value</th><th>Value used</th></tr></thead><tbody id="evidence-rows"></tbody></table></div></details>
+          <details open><summary>Original published values</summary><p class="small muted">Values are converted to the same units. The summary uses figures from the facility page; market listings are shown for comparison.</p><div class="table-scroll"><table><thead><tr><th>Source</th><th>Label</th><th>Original value</th><th>Converted value</th></tr></thead><tbody id="evidence-rows"></tbody></table></div></details>
           <details><summary>Saved page details</summary><div id="evidence-provenance" class="provenance"></div></details>
         </aside>
       </section>
-      <section id="method" class="section">
-        <div class="section-label"><span>04</span><h2>Definitions and method</h2></div>
-        <div class="method-grid">
-          <div><h3>What can we trust?</h3><p>We use the figures on each facility page and compare them with market cards and totals. Campus totals stay out of facility rows. Missing values remain unknown.</p><p>Operating status, current availability, GPU configurations, pricing, contract terms and measured latency are outside this dataset.</p><p id="future-example" hidden><a href="https://www.databank.com/data-centers/dallas/red-oak-campus/dfw12/" target="_blank" rel="noopener noreferrer">DFW12's source page</a> describes the facility in the future tense. Its advertised specification alone does not establish commissioned or available capacity.</p></div>
-          <div><h3>From page to finding</h3><ol><li>Save HTML with source URLs, retrieval times and hashes.</li><li>Parse labelled specifications, normalize units and validate facilities.</li><li>Record missing data, rejected rows and conflicting claims.</li><li>Calculate findings and publish only after quality checks pass.</li></ol><p class="small muted">Retrieval time is not the date a specification was last updated. Results can be rebuilt from the saved HTML without network access.</p></div>
-        </div>
-        <details><summary>Calculations</summary><ul id="calculations" class="issue-list"></ul></details>
+      <section id="about" class="section">
+        <div class="section-label"><span>04</span><h2>About the data</h2></div>
+        <p>Figures come from DataBank’s facility pages. We compare them with its market listings and flag disagreements. Missing information is shown as “Unknown.”</p>
+        <p>These are advertised specifications. Some facilities may still be planned or under development, so the totals don’t tell us how much capacity is operating or available to rent.</p>
+        <p>The collection date shows when we saved the pages. The figures themselves may be older.</p>
+        <details><summary>Calculations</summary><ul class="issue-list">
+          <li>Power density = advertised IT capacity (MW) × 1,000,000 ÷ IT floor area (ft²).</li>
+          <li>Median density is the middle facility value, averaging the two middle values when needed. Portfolio density divides total capacity by total floor area.</li>
+          <li>Capacity shares use total advertised MW; facility shares use the number of facilities.</li>
+        </ul></details>
       </section>
     </div>
   </main>

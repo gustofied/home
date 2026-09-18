@@ -10,7 +10,7 @@ const date = (value) => {
 };
 const fieldLabel = { critical_it_mw: "IT load", it_area_sqft: "IT floor area", onsite_carriers: "Carriers" };
 const units = { critical_it_mw: " MW", it_area_sqft: " ft²", onsite_carriers: "" };
-const origins = { card: "Market card", detail_main: "Facility headline", detail_specs: "Facility specification" };
+const origins = { card: "Market listing", detail_main: "Facility headline", detail_specs: "Facility specification" };
 let report, facilities = [], sortKey = "facility_code", ascending = true, showAllMarkets = false, csvUrl, lastTrigger;
 
 // This manually reviewed prose note applies only to the captured page we checked.
@@ -54,7 +54,7 @@ function proportion(label, share) {
 }
 function conflictText(item) {
   const unit = units[item.field] ?? "";
-  return `${marketName(new URL(item.source_url).pathname.split("/").filter(Boolean).at(-1))}: ${item.origin === "faq" ? "FAQ" : "headline"} states ${item.raw_value}; facility rows sum to ${fmt(item.facility_sum, 3)}${unit}.`;
+  return `${marketName(new URL(item.source_url).pathname.split("/").filter(Boolean).at(-1))}: ${item.origin === "faq" ? "FAQ" : "headline"} states ${item.raw_value}; individual facilities total ${fmt(item.facility_sum, 3)}${unit}.`;
 }
 
 function renderOverview() {
@@ -66,20 +66,17 @@ function renderOverview() {
   $("totals").replaceChildren(metric("Facilities", fmt(s.facility_count)), metric("Markets", fmt(s.market_count)), metric("Advertised IT capacity", `${fmt(s.critical_it_mw, 1)} MW`), metric("IT floor area", `${fmt(s.it_area_sqft)} ft²`));
   $("quality-finding").textContent = `${c.missing_count} of ${c.facility_count} facilities (${pct(c.missing_facility_share)}) have no known carrier count. They represent ${pct(c.missing_capacity_share)} of advertised capacity: ${fmt(c.missing_capacity_mw, 3)} of ${fmt(c.total_capacity_mw, 3)} MW.`;
   $("missing-chart").replaceChildren(proportion("Facilities with unknown carriers", c.missing_facility_share), proportion("Capacity at those facilities", c.missing_capacity_share));
-  $("quality-status").textContent = `${q.accounting.accepted} facilities included from ${q.accounting.candidates} listed entries. ${q.accounting.rejected} excluded. ${q.failures.length} failed pages. ${q.warning_counts.card_detail_conflicts} disagreements between market cards and facility pages. Publication checks ${q.gate}.`;
+  $("quality-status").textContent = `${q.accounting.accepted} facilities included. ${q.accounting.rejected} entries excluded. ${q.failures.length} pages failed to load. ${q.warning_counts.card_detail_conflicts} differences between market listings and facility pages.`;
   const conflicts = q.reconciliation.filter((item) => item.status === "conflict");
   $("issue-summary").textContent = `${conflicts.length} conflicting totals and ${q.parse_issues.length} ${q.parse_issues.length === 1 ? "value" : "values"} to review`;
   $("issues").replaceChildren();
   conflicts.forEach((item) => listItem($("issues"), conflictText(item), item.source_url));
-  q.parse_issues.forEach((item) => listItem($("issues"), `${item.record_level} ${item.raw_label}: “${item.raw_value}”. ${item.error ?? "Unrecognized label"} This claim does not replace facility values.`, item.source_url));
+  q.parse_issues.forEach((item) => listItem($("issues"), `${marketName(item.record_level)} ${item.raw_label}: “${item.raw_value}”. ${item.error ? "We could not interpret this value" : "We could not recognise this label"}, so it was not used.`, item.source_url));
   const names = (s.top_three_markets ?? []).map(marketName);
   $("concentration-title").textContent = `${pct(s.top_three_market_capacity_share)} of capacity sits in ${names.length} markets.`;
   $("concentration-finding").textContent = `${new Intl.ListFormat("en-GB").format(names)} contain ${s.top_three_market_facility_count ?? 0} of ${s.facility_count} facilities. Counting locations alone gives a different picture of the portfolio.`;
-  $("density-finding").textContent = `Median facility density is ${fmt(s.density_w_per_sqft.median)} W/ft². Total power divided by total IT floor area is ${fmt(s.portfolio_density_w_per_sqft)} W/ft², giving larger sites more weight. Neither measures utilisation, energy efficiency or GPU performance.`;
+  $("density-finding").textContent = `Median facility density is ${fmt(s.density_w_per_sqft.median)} W/ft². Total power divided by total IT floor area is ${fmt(s.portfolio_density_w_per_sqft)} W/ft², giving sites with more floor area more weight. Neither measures utilisation, energy efficiency or GPU performance.`;
   $("market").replaceChildren(new Option("All markets", ""), ...[...new Set(facilities.map((f) => f.market))].sort().map((m) => new Option(marketName(m), m)));
-  $("future-example").hidden = !reviewedDFW12();
-  $("calculations").replaceChildren();
-  [report.methodology.density_formula, report.methodology.density_comparison, report.methodology.carrier_coverage, report.methodology.correlation, report.methodology.reconciliation].forEach((text) => listItem($("calculations"), text));
   renderMarkets();
 }
 
@@ -187,13 +184,13 @@ function showEvidence(f, trigger) {
   $("evidence-address").textContent = [f.campus_name, f.address_raw].filter(Boolean).join(" / ");
   $("evidence-values").replaceChildren(metric("Advertised IT load", `${fmt(f.critical_it_mw, 3)} MW`), metric("IT floor area", `${fmt(f.it_area_sqft)} ft²`), metric("Capacity per area", `${fmt(f.capacity_density_w_per_sqft, 1)} W/ft²`), metric("Onsite carriers", fmt(f.onsite_carriers)));
   $("evidence-links").replaceChildren(link("Facility source ↗", f.detail_url), " / ", link("Market source ↗", f.market_url));
-  $("evidence-time").textContent = `Facility page retrieved ${date(f.fetched_at)}. Specification update date unknown.`;
+  $("evidence-time").textContent = `Page saved ${date(f.fetched_at)}. We do not know when these figures were last updated.`;
   const notes = $("evidence-notes"); notes.replaceChildren();
   if (f.onsite_carriers == null) listItem(notes, "Carrier count is unknown; it is not treated as zero.");
-  if (f.facility_code === "DFW12" && reviewedDFW12()) listItem(notes, "Manual source check: the captured description uses future tense. Advertised MW do not confirm operating status or current availability.", f.detail_url);
+  if (f.facility_code === "DFW12" && reviewedDFW12()) listItem(notes, "The saved description uses future tense. It does not confirm whether the facility is open or has capacity available to rent.", f.detail_url);
   report.quality.reconciliation.filter((item) => item.status === "conflict" && item.source_url === f.market_url).forEach((item) => listItem(notes, `Market context, not a change to this facility: ${conflictText(item)}`, item.source_url));
-  report.quality.card_detail_conflicts.filter((item) => item.facility_url === f.detail_url).forEach((item) => listItem(notes, `Conflicting ${fieldLabel[item.field] ?? item.field} claims. ${item.selection_rule}`));
-  if (!notes.children.length) listItem(notes, "No disagreements found between the facility figures, market cards or market totals. We have not independently verified the advertised specification.");
+  report.quality.card_detail_conflicts.filter((item) => item.facility_url === f.detail_url).forEach((item) => listItem(notes, `The published ${fieldLabel[item.field] ?? item.field} values differ. We use the facility page's main figure, or its specification table if the main figure is absent.`));
+  if (!notes.children.length) listItem(notes, "The published figures agree across the pages we checked. We have not independently verified them.");
   const claims = report.breakdowns.facility_evidence[f.facility_code] ?? [];
   const body = $("evidence-rows"); body.replaceChildren();
   claims.forEach((claim) => {
@@ -217,18 +214,18 @@ document.querySelectorAll("[data-sort]").forEach((button) => button.addEventList
 $("close-evidence").addEventListener("click", () => { $("evidence").hidden = true; lastTrigger?.focus(); });
 async function getJSON(url) {
   const response = await fetch(url);
-  if (!response.ok) throw new Error(`Data request failed (${response.status}). Run the pipeline to publish a valid snapshot, then retry.`);
+  if (!response.ok) throw new Error(`Could not load the data (${response.status}). Please retry.`);
   return response.json();
 }
 async function load() {
-  $("retry").hidden = true; $("study").hidden = true; $("status").hidden = false; $("status").textContent = "Loading the published snapshot…";
+  $("retry").hidden = true; $("study").hidden = true; $("status").hidden = false; $("status").textContent = "Loading data…";
   try {
     report = await getJSON("/api/overview");
     const result = await getJSON(`/api/facilities?run_id=${encodeURIComponent(report.run_id)}`);
-    if (result.run_id !== report.run_id) throw new Error("The report and facility rows belong to different runs. Please retry.");
-    if (!report.quality.carrier_coverage || !report.breakdowns.facility_evidence) throw new Error("This snapshot predates the analysis view. Replay the saved HTML with backend run, then retry.");
+    if (result.run_id !== report.run_id) throw new Error("The dataset changed while loading. Please retry.");
+    if (!report.quality.carrier_coverage || !report.breakdowns.facility_evidence) throw new Error("This dataset does not include the source details needed by this page.");
     facilities = result.facilities;
-    if (!facilities.length) throw new Error("The published snapshot contains no facilities.");
+    if (!facilities.length) throw new Error("No facilities are available in this dataset.");
     renderOverview(); renderFacilities(); $("study").hidden = false; $("status").hidden = true;
   } catch (error) { $("status").textContent = error.message; $("retry").hidden = false; }
 }
