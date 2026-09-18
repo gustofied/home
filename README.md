@@ -67,7 +67,7 @@ What data you use, how broad you go, and which language and tools you pick are a
 
 #### Find data center data online
 
-So yesterday I saw epoch, they extended their compute coverage, I thought maybe I can use that. But at the end of the day it was interesting but... , but personally it felt like a finished product, and I wasn’t sure it gave me enough room to show my own scraping and analysis. Google’s location pages didn’t provide enough comparable numerical data. I chose DataBank because it publishes power capacity and floor area for individual facilities, and its pages are straightforward to download and extract data from. There was other stuff here and there, but I didn't have the time to look at it.
+Google’s location pages didn’t provide enough comparable numerical data. I chose DataBank because it publishes power capacity and floor area for individual facilities, and its pages are straightforward to download and extract data from. There was other stuff here and there, but I didn't have the time to look at it.
 
 #### A simple scraping framework
 
