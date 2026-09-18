@@ -74,6 +74,10 @@ summary { cursor: pointer; color: var(--accent); font-size: 14px; font-weight: 5
 .market-bar .fill { background: var(--soft-blue); }
 .market-row.leading .fill { background: var(--accent); }
 .market-value { text-align: right; font-size: 14px; }
+.market-toggle { display: inline-flex; align-items: center; gap: 16px; margin: 16px 0; padding: 8px 16px; min-height: 40px; border: 1px solid var(--soft-blue); border-radius: 4px; color: var(--accent); background: var(--wash); font-size: 14px; transition: background-color 200ms cubic-bezier(.32,.72,0,1), border-color 200ms cubic-bezier(.32,.72,0,1); }
+.market-toggle::after { content: ""; width: 8px; height: 8px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: translateY(-2px) rotate(45deg); }
+.market-toggle:hover { background: var(--line); border-color: var(--accent); }
+.market-toggle[aria-expanded="true"]::after { transform: translateY(2px) rotate(225deg); }
 .filters { display: flex; align-items: end; flex-wrap: wrap; gap: 16px; margin-top: 32px; }
 .filters label { display: grid; gap: 8px; font-size: 14px; }
 .filters .search-label { flex: 1; min-width: 200px; }
