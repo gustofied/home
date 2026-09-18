@@ -65,17 +65,17 @@
         </div>
         <p class="small"><a id="download" download="databank-facilities.csv">Download the displayed rows as CSV</a></p>
         <aside id="evidence" class="evidence" tabindex="-1" hidden aria-labelledby="evidence-title">
-          <div class="evidence-heading"><div><p class="eyebrow">Inspect the evidence</p><h3 id="evidence-title"></h3></div><button id="close-evidence" type="button">Close</button></div>
+          <div class="evidence-heading"><div><p class="eyebrow">Source details</p><h3 id="evidence-title"></h3></div><button id="close-evidence" type="button">Close</button></div>
           <p id="evidence-address"></p><dl id="evidence-values" class="evidence-values"></dl><p id="evidence-links"></p><p id="evidence-time" class="small muted"></p>
           <ul id="evidence-notes" class="issue-list"></ul>
-          <details open><summary>Original published values</summary><div class="table-scroll"><table><thead><tr><th>Source</th><th>Label</th><th>Original value</th><th>Normalized</th></tr></thead><tbody id="evidence-rows"></tbody></table></div></details>
-          <details><summary>Snapshot provenance</summary><div id="evidence-provenance" class="provenance"></div></details>
+          <details open><summary>Original published values</summary><div class="table-scroll"><table><thead><tr><th>Source</th><th>Label</th><th>Original value</th><th>Value used</th></tr></thead><tbody id="evidence-rows"></tbody></table></div></details>
+          <details><summary>Saved page details</summary><div id="evidence-provenance" class="provenance"></div></details>
         </aside>
       </section>
       <section id="method" class="section">
         <div class="section-label"><span>04</span><h2>Definitions and method</h2></div>
         <div class="method-grid">
-          <div><h3>What can we trust?</h3><p>Facility detail figures supply the canonical values. Market cards and market totals are cross-checks. Campus totals stay out of facility rows. Missing values remain unknown.</p><p>Operating status, current availability, GPU configurations, pricing, contract terms and measured latency are outside this dataset.</p><p id="future-example" hidden><a href="https://www.databank.com/data-centers/dallas/red-oak-campus/dfw12/" target="_blank" rel="noopener noreferrer">DFW12's source page</a> describes the facility in the future tense. Its advertised specification alone does not establish commissioned or available capacity.</p></div>
+          <div><h3>What can we trust?</h3><p>We use the figures on each facility page and compare them with market cards and totals. Campus totals stay out of facility rows. Missing values remain unknown.</p><p>Operating status, current availability, GPU configurations, pricing, contract terms and measured latency are outside this dataset.</p><p id="future-example" hidden><a href="https://www.databank.com/data-centers/dallas/red-oak-campus/dfw12/" target="_blank" rel="noopener noreferrer">DFW12's source page</a> describes the facility in the future tense. Its advertised specification alone does not establish commissioned or available capacity.</p></div>
           <div><h3>From page to finding</h3><ol><li>Save HTML with source URLs, retrieval times and hashes.</li><li>Parse labelled specifications, normalize units and validate facilities.</li><li>Record missing data, rejected rows and conflicting claims.</li><li>Calculate findings and publish only after quality checks pass.</li></ol><p class="small muted">Retrieval time is not the date a specification was last updated. Results can be rebuilt from the saved HTML without network access.</p></div>
         </div>
         <details><summary>Calculations</summary><ul id="calculations" class="issue-list"></ul></details>

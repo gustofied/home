@@ -1,6 +1,6 @@
 # home
 
-Scraping and analyzing data center capacity and floor area.
+Scrape DataBank facility pages, check their quality and explore advertised capacity and floor area. Includes saved HTML and results for 76 facilities across 27 markets.
 
 ## Run locally
 
@@ -10,31 +10,48 @@ Requires Python 3.13 and [uv](https://docs.astral.sh/uv/).
 git clone https://github.com/gustofied/home.git
 cd home
 uv sync --locked
-uv run backend run --from-snapshot data/raw/20260918T081720-ab352538
-# Optional: refresh data from the source website
-# uv run backend run --all-markets
-uv run fastapi dev
+uv run --locked fastapi dev
 ```
 
-Open <http://127.0.0.1:8000>. The CLI builds data; FastAPI serves the page and published results.
-Optional settings: `.env.example`.
+Open <http://127.0.0.1:8000>. The included results are ready to view. FastAPI serves the HTML, CSS, JavaScript and saved data. It stays running and does not scrape.
+
+To serve without development reload:
+
+```bash
+uv run --locked fastapi run --host 127.0.0.1 --port 8000
+```
+
+## Data pipeline
+
+Rebuild from the included HTML without contacting DataBank:
+
+```bash
+uv run --locked backend run --from-snapshot data/raw/20260918T081720-ab352538
+```
+
+Refresh the complete portfolio from the website:
+
+```bash
+./scripts/refresh.sh
+```
+
+The script runs `uv run --locked backend run --all-markets`. It discovers markets and facilities, saves HTML, parses and validates records, calculates the analysis, and publishes results when quality checks pass. It runs once and exits. Failures return a nonzero exit code and leave the previous published results available.
+
+The pipeline and server use the same `data/` directory. Set `BACKEND_DATA_DIR` for both to use another location; see `.env.example`. Reload the page after a refresh to see the new results. Use the saved HTML command for a reproducible walkthrough.
 
 ## Checks
 
 ```bash
-uv run pytest -q
-uv run ruff check .
-uv run ruff format --check .
+uv run --locked pytest -q
+uv run --locked ruff check .
+uv run --locked ruff format --check .
 ```
-
-`./scripts/demo.sh` replays the included raw capture, checks the API and stops the server afterward.
-Set `PORT=18080` to use another port.
 
 ## API
 
-- `GET /api/health` — server health.
-- `GET /api/overview` — summary, quality checks and chart data.
-- `GET /api/facilities` — facility rows; optional `market`, `min_capacity_mw` and `run_id` filters.
+- `GET /api/health`: server health.
+- `GET /api/overview`: summary, quality checks and chart data.
+- `GET /api/facilities`: facility rows; optional `market`, `min_capacity_mw` and `run_id` filters.
 
 Interactive documentation: <http://127.0.0.1:8000/docs>.
 
@@ -54,21 +71,20 @@ So yesterday I saw epoch, they extended their compute coverage, I thought maybe 
 
 #### A simple scraping framework
 
-A Typer command runs the pipeline: HTTPX2 downloads directory, market and facility pages; BeautifulSoup extracts labelled specifications; Pydantic validates one row per facility. Detail pages supply the values, market cards provide a cross-check, and campus totals stay separate.
+A Typer command runs the pipeline. HTTPX2 downloads pages, BeautifulSoup extracts labelled specifications, and Pydantic validates one row per facility. Detail pages supply the values; market cards provide a cross-check. Campus totals stay separate.
 
-1. **Bronze (`data/raw/`):** HTML, URLs, retrieval times and hashes for offline replay.
-2. **Silver (`data/silver/`):** validated facility rows in MW and square feet, rejected records and quality checks.
-3. **Gold (`data/gold/`):** summaries and chart data. Quality checks gate an atomic `latest.json` update; FastAPI reads the published files. Failed runs preserve the last good result.
+1. **Raw pages (`data/raw/`):** HTML, source URLs, collection times and file hashes.
+2. **Facility rows (`data/silver/`):** values in MW and square feet, rejected records and quality checks.
+3. **Analysis (`data/gold/`):** summaries and chart data. After checks pass, `latest.json` points the website to the new results.
 
 ##### How it would work in production
 
-My initial suggestion would be to keep the Python pipeline we already have and put something around it to run the job.
+I’d have a scheduler such as Windmill run `./scripts/refresh.sh` from a checkout with Python and uv installed. The script is the job; the scheduler decides when it runs.
 
-- **Running it:** Something like Windmill, Dagster/Airflow, or GitHub Actions. I’d choose based on how much coordination we need and what the team already uses.
-- **Storing it:** I’d use S3 for the raw snapshots, cleaned records and analytical results, keeping each run separate so we can trace a result back to its source.
-- **Processing it:** The same raw → validated → summary stages. Keeping the original captures means we can fix a parser and replay the data without scraping everything again.
-- **Serving it:** S3 could form the storage layer of a small data lake. The API would expose the prepared results to a frontend for analysis and presentation.
-- **Keeping it reliable:** Keep rate limits, retries and timeouts, alert on failed runs or unexpected data changes, and only publish results that pass the quality checks. A failed run should leave the previous results available.
+- Keep `data/` between runs and make it available to the separately running FastAPI server.
+- Prevent overlapping refreshes in the scheduler, capture logs and alert on failures or unexpected data changes.
+- Keep request limits, retries, timeouts and quality checks. A failed refresh leaves the website on the previous results.
+- For cloud storage, adapt the file storage to S3 while keeping each run and its source pages together. Saved HTML lets us fix parsing and rebuild results without fetching again.
 
 #### Analyze the data
 
@@ -96,4 +112,4 @@ Quality first, then concentration and facility differences. Counts alone hide ho
 
 ##### Visualising the data
 
-Basic HTML, CSS and JavaScript served by FastAPI. Two data requests load a consistent published run; filtering, sorting, charts and facility evidence then work locally. Each facility exposes original values, source links, retrieval times and page hashes.
+Basic HTML, CSS and JavaScript served by FastAPI. Two requests load the report and facility rows from the same run. Filtering, sorting and source details then work in the browser. Each facility shows original values, source links, collection times and file hashes.

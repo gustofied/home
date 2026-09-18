@@ -59,9 +59,9 @@ function renderOverview() {
   $("totals").replaceChildren(metric("Facilities", fmt(s.facility_count)), metric("Markets", fmt(s.market_count)), metric("Advertised IT capacity", `${fmt(s.critical_it_mw, 1)} MW`), metric("IT floor area", `${fmt(s.it_area_sqft)} ft²`));
   $("quality-finding").textContent = `${c.missing_count} of ${c.facility_count} facilities (${pct(c.missing_facility_share)}) have no known carrier count. They represent ${pct(c.missing_capacity_share)} of advertised capacity: ${fmt(c.missing_capacity_mw, 3)} of ${fmt(c.total_capacity_mw, 3)} MW.`;
   $("missing-chart").replaceChildren(proportion("Facilities with unknown carriers", c.missing_facility_share), proportion("Capacity at those facilities", c.missing_capacity_share));
-  $("quality-status").textContent = `${q.accounting.accepted} accepted / ${q.accounting.candidates} candidates. ${q.accounting.rejected} rejected. ${q.failures.length} failed pages. ${q.warning_counts.card_detail_conflicts} card/detail conflicts. Quality gate: ${q.gate}.`;
+  $("quality-status").textContent = `${q.accounting.accepted} facilities included from ${q.accounting.candidates} listed entries. ${q.accounting.rejected} excluded. ${q.failures.length} failed pages. ${q.warning_counts.card_detail_conflicts} disagreements between market cards and facility pages. Publication checks ${q.gate}.`;
   const conflicts = q.reconciliation.filter((item) => item.status === "conflict");
-  $("issue-summary").textContent = `${conflicts.length} aggregate discrepancies and ${q.parse_issues.length} parsing ${q.parse_issues.length === 1 ? "note" : "notes"}`;
+  $("issue-summary").textContent = `${conflicts.length} conflicting totals and ${q.parse_issues.length} ${q.parse_issues.length === 1 ? "value" : "values"} to review`;
   $("issues").replaceChildren();
   conflicts.forEach((item) => listItem($("issues"), conflictText(item), item.source_url));
   q.parse_issues.forEach((item) => listItem($("issues"), `${item.record_level} ${item.raw_label}: “${item.raw_value}”. ${item.error ?? "Unrecognized label"} This claim does not replace facility values.`, item.source_url));
@@ -186,7 +186,7 @@ function showEvidence(f, trigger) {
   if (f.facility_code === "DFW12" && reviewedDFW12()) listItem(notes, "Manual source check: the captured description uses future tense. Advertised MW do not confirm operating status or current availability.", f.detail_url);
   report.quality.reconciliation.filter((item) => item.status === "conflict" && item.source_url === f.market_url).forEach((item) => listItem(notes, `Market context, not a change to this facility: ${conflictText(item)}`, item.source_url));
   report.quality.card_detail_conflicts.filter((item) => item.facility_url === f.detail_url).forEach((item) => listItem(notes, `Conflicting ${fieldLabel[item.field] ?? item.field} claims. ${item.selection_rule}`));
-  if (!notes.children.length) listItem(notes, "No card/detail or market-total conflict recorded for this facility's market. This is not independent verification of the advertised specification.");
+  if (!notes.children.length) listItem(notes, "No disagreements found between the facility figures, market cards or market totals. We have not independently verified the advertised specification.");
   const claims = report.breakdowns.facility_evidence[f.facility_code] ?? [];
   const body = $("evidence-rows"); body.replaceChildren();
   claims.forEach((claim) => {
