@@ -1,6 +1,6 @@
-# home
+## A home for data center facility insights
 
-Scrape DataBank facility pages, check their quality and explore advertised capacity and floor area. Includes saved HTML and results for 76 facilities across 27 markets.
+Explore advertised capacity, floor area and data quality across 76 facilities in 27 markets. Includes the scraper, saved HTML and results.
 
 ## Run locally
 
