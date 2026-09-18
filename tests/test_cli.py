@@ -11,8 +11,9 @@ def test_help() -> None:
     result = runner.invoke(app, ["--help"])
 
     assert result.exit_code == 0
-    assert "serve" in result.output
-    assert "ping" in result.output
+    assert "run" in result.output
+    assert "serve" not in result.output
+    assert "ping" not in result.output
 
 
 def test_offline_cli_and_exclusive_options(tmp_path):

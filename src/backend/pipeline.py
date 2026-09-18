@@ -158,6 +158,12 @@ def run_pipeline(
         fetcher.save_manifest()
     records.sort(key=lambda record: record.facility_code)
     normalize_observations(observations)
+    pages = {p["requested_url"]: p for p in manifest["pages"]}
+    for observation in observations:
+        page = pages.get(observation["source_url"])
+        if page:
+            observation["fetched_at"] = page["fetched_at"]
+            observation["sha256"] = page["sha256"]
     previous_count = None
     # Replay is independent of mutable publication history.
     if from_snapshot is None:
@@ -201,7 +207,7 @@ def run_pipeline(
         "retrieval_finished_at": as_of.isoformat(),
         "source_freshness": "Unknown; retrieval timestamps are not publication dates.",
     }
-    report = analyze(records, quality, run_id, as_of, source)
+    report = analyze(records, quality, run_id, as_of, source, observations)
     write_jsonl(
         silver / "facilities.jsonl",
         [r.model_dump(mode="json", exclude_computed_fields=True) for r in records],

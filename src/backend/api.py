@@ -44,9 +44,19 @@ def overview() -> OverviewResponse:
 def facilities(
     market: Annotated[str | None, Query(min_length=1, max_length=100)] = None,
     min_capacity_mw: Annotated[float | None, Query(ge=0, allow_inf_nan=False)] = None,
+    run_id: Annotated[
+        str | None,
+        Query(pattern=r"^[A-Za-z0-9][A-Za-z0-9_-]{0,79}$"),
+    ] = None,
 ) -> FacilitiesResponse:
-    run_id = published_run()
+    run_id = run_id or published_run()
     try:
+        # Pin both page requests to a successfully published run, even if latest changes.
+        report = OverviewResponse.model_validate_json(
+            (settings.data_dir / "gold" / run_id / "report.json").read_text()
+        )
+        if report.quality.get("gate") != "passed":
+            raise ValueError("Run did not pass publication checks")
         records = read_facilities(settings.data_dir, run_id)
     except (OSError, ValueError):
         raise HTTPException(

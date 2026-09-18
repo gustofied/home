@@ -1,19 +1,89 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>DataBank Explorer</title>
-    <link rel="stylesheet" href="/styles.css">
-  </head>
-  <body>
-    <main>
-      <h1>DataBank Explorer</h1>
-      <p>Advertised IT capacity, floor area and data quality.</p>
-      <p>No facility data loaded.</p>
-      <p id="status">Checking API…</p>
-      <a href="/docs">API documentation</a>
-    </main>
-    <script type="module" src="/app.js"></script>
-  </body>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="DataBank's advertised data center capacity: quality, concentration and facility evidence.">
+  <title>DataBank Explorer | home</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <a class="skip" href="#content">Skip to content</a>
+  <header class="masthead">
+    <a class="brand" href="/">home<span> / DataBank study</span></a>
+    <nav aria-label="Page"><a href="#quality">Quality</a><a href="#portfolio">Portfolio</a><a href="#comparison">Facilities</a><a href="#method">Method</a></nav>
+  </header>
+  <main id="content">
+    <header class="intro">
+      <p class="eyebrow" id="collection">Published inventory</p>
+      <h1>Where the capacity sits.</h1>
+      <p class="lede">Where is advertised capacity concentrated, how do facilities differ, and how much can we trust the published information?</p>
+      <p class="muted">One row per facility. Critical IT load is advertised power capacity, not electricity use or capacity available to buy.</p>
+    </header>
+    <p id="status" role="status">Loading the published snapshot…</p>
+    <button id="retry" type="button" hidden>Retry loading</button>
+    <noscript>This explorer needs JavaScript. See <a href="/api/overview">the report API</a> for the published data.</noscript>
+    <div id="study" hidden>
+      <dl id="totals" class="totals"></dl>
+      <section id="quality" class="section">
+        <div class="section-label"><span>01</span><h2>Coverage and quality</h2></div>
+        <div class="quality-layout">
+          <div><h3>Missing information is concentrated, too.</h3><p id="quality-finding"></p><p class="muted">Carrier counts describe listed connections. They cannot establish network quality or latency, and an unknown count is not zero.</p><button id="missing-filter" class="text-button" type="button">Inspect facilities with unknown carriers →</button></div>
+          <div><div id="missing-chart" class="proportions"></div><p id="quality-status" class="small"></p><details><summary id="issue-summary">Source discrepancies</summary><ul id="issues" class="issue-list"></ul></details></div>
+        </div>
+      </section>
+      <section id="portfolio" class="section">
+        <div class="section-label"><span>02</span><h2>Portfolio overview</h2></div>
+        <h3 id="concentration-title"></h3><p id="concentration-finding"></p>
+        <div class="market-head"><span>Market</span><span>Advertised IT capacity</span><span>Facilities</span></div>
+        <div id="market-chart" aria-label="Advertised capacity by market"></div>
+        <button id="all-markets" class="text-button" type="button" aria-expanded="false">Show all markets</button>
+        <p class="small muted">Shares use all accepted facilities in this snapshot. They describe one operator's published inventory, not global market share.</p>
+      </section>
+      <section id="comparison" class="section">
+        <div class="section-label"><span>03</span><h2>Facility comparison</h2></div>
+        <h3>A typical facility is not the portfolio average.</h3><p id="density-finding"></p>
+        <form id="filters" class="filters" role="search">
+          <label>Market<select id="market"><option value="">All markets</option></select></label>
+          <label class="search-label">Find a facility<input id="search" type="search" placeholder="Code, name, campus or address"></label>
+          <label class="check"><input id="missing" type="checkbox">Unknown carriers only</label>
+          <button id="reset-filters" type="button">Reset</button>
+        </form>
+        <div class="chart-toolbar"><p id="result-count" role="status"></p><label class="check"><input id="log-scale" type="checkbox" checked>Log axes</label></div>
+        <figure class="scatter"><div id="scatter-chart"></div><figcaption>Each point is one facility; identical specifications overlap. Select a point or table code for evidence. Filled = carrier count known; hollow = unknown. Filters affect the chart and table; portfolio findings above remain unchanged.</figcaption></figure>
+        <p id="empty" hidden>No facilities match these filters. Try a different search or reset.</p>
+        <div class="table-scroll" tabindex="0" aria-label="Facility comparison table">
+          <table id="facility-table"><caption class="sr-only">Filtered DataBank facilities. Select a column heading to sort.</caption><thead><tr>
+            <th aria-sort="ascending"><button type="button" data-sort="facility_code">Facility ↕</button></th>
+            <th><button type="button" data-sort="market">Market ↕</button></th>
+            <th class="numeric"><button type="button" data-sort="critical_it_mw">IT load (MW) ↕</button></th>
+            <th class="numeric"><button type="button" data-sort="it_area_sqft">IT area (ft²) ↕</button></th>
+            <th class="numeric"><button type="button" data-sort="capacity_density_w_per_sqft">W/ft² ↕</button></th>
+            <th class="numeric"><button type="button" data-sort="onsite_carriers">Carriers ↕</button></th>
+          </tr></thead><tbody id="facility-rows"></tbody></table>
+        </div>
+        <p class="small"><a id="download" download="databank-facilities.csv">Download the displayed rows as CSV</a></p>
+        <aside id="evidence" class="evidence" tabindex="-1" hidden aria-labelledby="evidence-title">
+          <div class="evidence-heading"><div><p class="eyebrow">Inspect the evidence</p><h3 id="evidence-title"></h3></div><button id="close-evidence" type="button">Close</button></div>
+          <p id="evidence-address"></p><dl id="evidence-values" class="evidence-values"></dl><p id="evidence-links"></p><p id="evidence-time" class="small muted"></p>
+          <ul id="evidence-notes" class="issue-list"></ul>
+          <details open><summary>Original published values</summary><div class="table-scroll"><table><thead><tr><th>Source</th><th>Label</th><th>Original value</th><th>Normalized</th></tr></thead><tbody id="evidence-rows"></tbody></table></div></details>
+          <details><summary>Snapshot provenance</summary><div id="evidence-provenance" class="provenance"></div></details>
+        </aside>
+      </section>
+      <section id="method" class="section">
+        <div class="section-label"><span>04</span><h2>Definitions and method</h2></div>
+        <div class="method-grid">
+          <div><h3>What can we trust?</h3><p>Facility detail figures supply the canonical values. Market cards and market totals are cross-checks. Campus totals stay out of facility rows. Missing values remain unknown.</p><p>Operating status, current availability, GPU configurations, pricing, contract terms and measured latency are outside this dataset.</p><p id="future-example" hidden><a href="https://www.databank.com/data-centers/dallas/red-oak-campus/dfw12/" target="_blank" rel="noopener noreferrer">DFW12's source page</a> describes the facility in the future tense. Its advertised specification alone does not establish commissioned or available capacity.</p></div>
+          <div><h3>From page to finding</h3><ol><li>Save HTML with source URLs, retrieval times and hashes.</li><li>Parse labelled specifications, normalize units and validate facilities.</li><li>Record missing data, rejected rows and conflicting claims.</li><li>Calculate findings and publish only after quality checks pass.</li></ol><p class="small muted">Retrieval time is not the date a specification was last updated. Results can be rebuilt from the saved HTML without network access.</p></div>
+        </div>
+        <details><summary>Calculations</summary><ul id="calculations" class="issue-list"></ul></details>
+        <p class="small muted">Presentation reference: <a href="https://epoch.ai/data/ai-data-centers" target="_blank" rel="noopener noreferrer">Epoch AI's overview, comparisons and source evidence</a>. All facility data here comes from DataBank.</p>
+      </section>
+    </div>
+  </main>
+  <footer><span>home / DataBank Explorer</span><a href="/docs">API documentation</a><span id="run-id"></span></footer>
+  <script type="module" src="/app.js"></script>
+</body>
 </html>

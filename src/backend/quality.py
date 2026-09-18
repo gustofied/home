@@ -118,6 +118,9 @@ def assess_quality(
         }
         if previous_count and len(candidates) < previous_count * 0.8:
             blockers.append("candidate_count_drop_over_20_percent")
+    missing_carriers = [r for r in records if r.onsite_carriers is None]
+    total_mw = sum(r.critical_it_mw for r in records)
+    missing_mw = sum(r.critical_it_mw for r in missing_carriers)
     return {
         "gate": "failed" if blockers else "passed",
         "blockers": blockers,
@@ -133,6 +136,17 @@ def assess_quality(
             for field in ("onsite_carriers", "address_raw", "campus_name")
         },
         "missingness_denominator": len(records),
+        "carrier_coverage": {
+            "missing_count": len(missing_carriers),
+            "facility_count": len(records),
+            "missing_facility_share": len(missing_carriers) / len(records)
+            if records
+            else None,
+            "missing_capacity_mw": round(missing_mw, 6),
+            "total_capacity_mw": round(total_mw, 6),
+            "missing_capacity_share": missing_mw / total_mw if total_mw else None,
+            "facility_codes": [r.facility_code for r in missing_carriers],
+        },
         "missingness_notes": {
             "campus_name": "Null means no explicit campus grouping in the market listing; it does not invalidate a facility."
         },

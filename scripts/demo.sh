@@ -31,7 +31,7 @@ with socket.socket() as listener:
     listener.bind(("127.0.0.1", int(sys.argv[1])))
 PY
 
-BACKEND_DATA_DIR="$DEMO_DATA_DIR" BACKEND_HOST=127.0.0.1 BACKEND_PORT="$PORT" BACKEND_RELOAD=false .venv/bin/backend serve &
+BACKEND_DATA_DIR="$DEMO_DATA_DIR" .venv/bin/fastapi run --host 127.0.0.1 --port "$PORT" &
 SERVER_PID=$!
 
 for _ in {1..50}; do
@@ -53,7 +53,7 @@ if [[ "$READY" != true ]]; then
   exit 1
 fi
 
-BACKEND_HOST=127.0.0.1 BACKEND_PORT="$PORT" .venv/bin/backend ping
+curl --silent --show-error --fail --max-time 5 "http://127.0.0.1:$PORT/api/health"
 curl --silent --show-error --fail --max-time 5 "http://127.0.0.1:$PORT/" >/dev/null
 curl --silent --show-error --fail --max-time 5 "http://127.0.0.1:$PORT/api/overview" | .venv/bin/python -c 'import json, sys; r=json.load(sys.stdin); assert r["summary"]["facility_count"] == 76; assert r["source"]["data_kind"] == "live"; print(json.dumps(r["summary"], indent=2))'
 curl --silent --show-error --fail --max-time 5 "http://127.0.0.1:$PORT/api/facilities?market=chicago&min_capacity_mw=5" | .venv/bin/python -c 'import json, sys; r=json.load(sys.stdin); assert r["count"] == 1; assert r["facilities"][0]["facility_code"] == "ORD4"'

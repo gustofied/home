@@ -11,14 +11,19 @@ def analyze(
     run_id: str,
     as_of: datetime,
     source: dict,
+    observations: list[dict] | None = None,
 ) -> OverviewResponse:
     frame = pd.DataFrame([r.model_dump(mode="json") for r in records])
     total_mw = sum(r.critical_it_mw for r in records)
+    total_area = sum(r.it_area_sqft for r in records)
     summary = {
         "facility_count": len(records),
         "market_count": len({r.market for r in records}),
         "critical_it_mw": round(total_mw, 6),
-        "it_area_sqft": sum(r.it_area_sqft for r in records),
+        "it_area_sqft": total_area,
+        "portfolio_density_w_per_sqft": round(total_mw * 1_000_000 / total_area, 3)
+        if total_area
+        else None,
         "density_w_per_sqft": {"median": None, "p10": None, "p90": None},
         "correlation": {
             "n": len(records),
@@ -50,6 +55,10 @@ def analyze(
         summary["top_three_market_capacity_share"] = sum(
             m["capacity_share"] for m in markets[:3]
         )
+        summary["top_three_market_facility_count"] = sum(
+            m["facility_count"] for m in markets[:3]
+        )
+        summary["top_three_markets"] = [m["market"] for m in markets[:3]]
         if len(records) >= 5:
             x, y = frame["it_area_sqft"], frame["critical_it_mw"]
             if x.nunique() > 1 and y.nunique() > 1:
@@ -87,12 +96,25 @@ def analyze(
                 for r in records
             ],
             "density_outliers": outliers,
+            "facility_evidence": {
+                r.facility_code: [
+                    o
+                    for o in observations or []
+                    if o.get("record_level") == "facility"
+                    and o.get("facility_url", o["source_url"]) == str(r.detail_url)
+                    and o.get("field")
+                    in {"critical_it_mw", "it_area_sqft", "onsite_carriers"}
+                ]
+                for r in records
+            },
         },
         methodology={
-            "question": "How does advertised critical IT load scale with IT floor area, and in which DataBank markets is that capacity concentrated?",
+            "question": "Where is advertised capacity concentrated, how do facilities differ, and how much can we trust the published information?",
             "canonical_values": "Detail main figures take precedence over repeated detail specifications. Market-card values are retained as comparison evidence, never as fallback for missing required detail values.",
             "density_formula": "critical_it_mw * 1000000 / it_area_sqft",
             "density_meaning": "Advertised capacity per IT floor area, not measured consumption, utilization, or energy efficiency.",
+            "density_comparison": "The median gives every accepted facility equal weight. Portfolio density divides total MW by total IT floor area on the same rows; it is an area-weighted mean of facility densities.",
+            "carrier_coverage": "Missing carrier counts are measured both as a share of accepted facilities and as a share of their total advertised MW. Missing counts are not zero; carrier count does not establish latency or connectivity quality.",
             "correlation": "Pearson on values; Spearman as Pearson on average ranks. Descriptive associations only; withheld for n < 5 or constant inputs.",
             "outliers": "Tukey 1.5 IQR fences on capacity density for n >= 5; flagged records remain included.",
             "reconciliation": "All market/portfolio claims compared separately. Rounding tolerance is half the last displayed digit; conflicts remain visible and do not on their own invalidate otherwise complete records.",

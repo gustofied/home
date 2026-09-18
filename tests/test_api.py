@@ -38,3 +38,24 @@ def test_missing_results_and_published_contracts(tmp_path, monkeypatch):
     assert response.json()["facilities"][0]["facility_code"] == "ORD4"
     assert client.get("/api/facilities?min_capacity_mw=-1").status_code == 422
     assert client.get("/api/facilities?market=missing").json()["count"] == 0
+    first_id = overview.json()["run_id"]
+    second = run_pipeline(tmp_path, from_snapshot=example)
+    assert second.run_id != first_id
+    pinned = client.get("/api/facilities", params={"run_id": first_id})
+    assert pinned.status_code == 200
+    assert pinned.json()["run_id"] == first_id
+    assert (
+        client.get("/api/facilities", params={"run_id": "../outside"}).status_code
+        == 422
+    )
+    assert client.get("/api/facilities?run_id=missing").status_code == 503
+    claims = overview.json()["breakdowns"]["facility_evidence"]["ORD1"]
+    power = next(
+        c
+        for c in claims
+        if c["field"] == "critical_it_mw" and c["origin"] == "detail_main"
+    )
+    assert power["raw_value"] == "1MW"
+    assert power["value"] == 1
+    assert len(power["sha256"]) == 64
+    assert power["fetched_at"]
