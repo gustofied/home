@@ -1,6 +1,6 @@
 ## A home for data center facility insights
 
-Explore advertised capacity, floor area and data quality across 76 facilities in 27 markets. Includes the scraper, saved HTML and results.
+Includes the scraper to get the data, a pipeline to process it, a frontend to look at it, some analysis to understand it, and a suggested production setup.
 
 ## Run locally
 
