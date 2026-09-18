@@ -36,6 +36,8 @@ Set `PORT=18080` to use another port.
 ## API
 
 - `GET /api/health` — server health.
+- `GET /api/overview` — summary, quality checks and chart data.
+- `GET /api/facilities` — facility rows; optional `market` and `min_capacity_mw` filters.
 
 Interactive documentation: <http://127.0.0.1:8000/docs>.
 
@@ -57,7 +59,7 @@ So yesterday I saw epoch, they extended their compute coverage, I thought maybe 
 
 A Typer command runs the pipeline. HTTPX2 downloads DataBank’s directory, market and facility pages; BeautifulSoup extracts labelled specifications; Pydantic validates one row per facility. Facility detail values are canonical, with market cards kept for comparison and campus totals excluded.
 
-1. **Bronze:** save HTML, source URLs, retrieval times and content hashes so runs can be replayed offline.
+1. **Bronze (`data/raw/`):** save HTML, source URLs, retrieval times and content hashes so runs can be replayed offline.
 2. **Silver:** normalize power to MW and IT floor area to square feet. Save facility rows, rejected records and quality checks, including missing values, duplicates and conflicting totals.
 3. **Gold:** calculate summaries and chart data. Publish through an atomic `latest.json` update only when quality checks pass. FastAPI reads the published files; failed runs leave the last good result available.
 
